@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 // assets
 import BookOutlined from '@ant-design/icons/BookOutlined';
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/AddCircle';
 import ViewIcon from '@mui/icons-material/RemoveRedEye';
 
 // type
