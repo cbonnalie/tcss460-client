@@ -35,7 +35,7 @@ const books: NavItemType = {
       id: 'view-books',
       title: <FormattedMessage id="view-books" />,
       type: 'item',
-      url: '/books/list',
+      url: '/books/list/all',
       icon: icons.ViewIcon
     }
   ]

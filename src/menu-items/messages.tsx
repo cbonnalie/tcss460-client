@@ -32,7 +32,7 @@ const messages: NavItemType = {
       icon: icons.SendIcon
     },
     {
-      id: 'view-messages',
+      id: 'list-messages',
       title: <FormattedMessage id="view-messages" />,
       type: 'item',
       url: '/messages/list',
