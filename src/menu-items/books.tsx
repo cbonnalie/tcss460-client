@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import BookOutlined from '@ant-design/icons/BookOutlined';
 import AddIcon from '@mui/icons-material/AddCircle';
 import ViewIcon from '@mui/icons-material/RemoveRedEye';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -13,7 +14,8 @@ import { NavItemType } from 'types/menu';
 const icons = {
   BookOutlined,
   AddIcon,
-  ViewIcon
+  ViewIcon,
+  ImportContactsIcon
 };
 
 // ==============================|| MENU ITEMS - BOOKS ||============================== //
@@ -30,6 +32,13 @@ const books: NavItemType = {
       type: 'item',
       url: '/books/add',
       icon: icons.AddIcon
+    },
+    {
+      id: 'single-book',
+      title: <FormattedMessage id="single-book" />,
+      type: 'item',
+      url: '/books/book',
+      icon: icons.ImportContactsIcon
     },
     {
       id: 'view-books',
