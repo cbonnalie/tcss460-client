@@ -16,5 +16,6 @@
   "view-messages": "View Messages",
   "books": "Books",
   "add-book": "Create Book",
-  "view-books": "View Books"
+  "view-books": "View Books",
+  "single-book": "Get Book"
 }
