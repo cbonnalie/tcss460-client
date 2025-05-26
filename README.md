@@ -9,3 +9,20 @@
 
 - Christian
     - Set up repository and hosted client on Vercel.
+ 
+## Beta Sprint
+
+### Contribution
+
+- Christian
+    - Linked front end to API.
+    - Created page to view all books with pagination.
+- Kaleb
+    - Created page to search for a single book.
+    - Created page to view a single book and edit its ratings data.
+- Mark
+    - Created a form to allow a user to change password
+    - Created the ui for changing password
+- Noah
+    - Updated the register/login form to match the 3rd-party Auth API registration/login requirements and tested.
+    - Adjustments to authOptions.tsx to work with the 3rd-party Web API. 
