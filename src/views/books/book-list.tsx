@@ -67,7 +67,7 @@ const PaginationControl = ({ pagination, onPageChange }) => (
   </Stack>
 );
 
-const transformBookData = (bookData) => ({
+const transformBookData = (bookData: any) => ({
   isbn13: bookData.isbn13,
   authors: bookData.authors.split(', '),
   publication: bookData.publication,

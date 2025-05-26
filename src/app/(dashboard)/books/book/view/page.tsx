@@ -20,7 +20,7 @@ import axios from 'utils/axios';
 
 const defaultTheme = createTheme();
 
-const transformBookData = (bookData) => ({
+const transformBookData = (bookData: any) => ({
   isbn13: bookData.isbn13,
   authors: bookData.authors.split(', '),
   publication: bookData.publication,
@@ -127,7 +127,7 @@ function RatingSummary({ book }: { book: IBook }) {
     editableData.rating_5_star;
 
   const avgRating =
-    (editableData.rating_1_star * 1 +
+    (editableData.rating_1_star +
       editableData.rating_2_star * 2 +
       editableData.rating_3_star * 3 +
       editableData.rating_4_star * 4 +
