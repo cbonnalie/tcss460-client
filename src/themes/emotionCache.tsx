@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useState } from 'react';
+import { Provider, ReactNode, useState } from 'react';
 
 // next
 import { useServerInsertedHTML } from 'next/navigation';
@@ -14,7 +14,7 @@ export type NextAppDirEmotionCacheProviderProps = {
   /** This is the options passed to createCache() from 'import createCache from "@emotion/cache"' */
   options: Omit<OptionsOfCreateCache, 'insertionPoint'>;
   /** By default <CacheProvider /> from 'import { CacheProvider } from "@emotion/react"' */
-  CacheProvider?: React.ComponentType<{ value: EmotionCache; children: ReactNode }>;
+  CacheProvider: Provider<EmotionCache>;
   children: ReactNode;
 };
 
