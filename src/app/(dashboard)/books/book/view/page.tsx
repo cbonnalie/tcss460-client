@@ -15,7 +15,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
-import { IBook } from '/types/book';
+import { IBook } from 'types/book';
 import axios from 'utils/axios';
 
 const defaultTheme = createTheme();
