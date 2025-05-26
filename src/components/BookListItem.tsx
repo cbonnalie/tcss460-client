@@ -1,5 +1,6 @@
 ﻿import { Avatar, Box, ListItem, Rating, Typography } from '@mui/material';
 import { IBook } from 'types/book';
+import ListItemButton from '@mui/material/ListItemButton';
 
 function BookAvatar({ image, title }: { image: string; title: string }) {
   return (
@@ -50,9 +51,15 @@ function BookRating({ average, count }: { average: number; count: number }) {
 }
 
 // Main component
-export function BookListItem({ book }: { book: IBook }) {
+export function BookListItem({ book, onClick }: { book: IBook, onClick?: (book: IBook) => void }) {
+
   return (
-    <ListItem alignItems="flex-start" sx={{ py: 2 }}>
+    <ListItem disablePadding>
+      <ListItemButton
+        alignItems="flex-start"
+        sx={{ py: 2 }}
+        onClick={() => onClick?.(book)}
+      >
 
       <BookAvatar
         image={book.small}
@@ -73,6 +80,7 @@ export function BookListItem({ book }: { book: IBook }) {
         />
 
       </Box>
+      </ListItemButton>
     </ListItem>
   );
 }

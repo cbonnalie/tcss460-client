@@ -12,33 +12,18 @@ import AnimateButton from '../../../components/@extended/AnimateButton';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/navigation';
 
-const defaultBook = {
-  isbn13: '9780525951650',
-  title: 'Fall of Giants',
-  original_title: 'I, Robot (Robot #0.1)',
-  authors: 'Isaac Asimov',
-  publication_year: '2005',
-  rating_avg: 1221 + 5332 + 35107 + 82535 + 86024,
-  rating_count: (1221 * 1 + 5332 * 2 + 35107 * 3 + 82535 * 4 + 86024 * 5) / (1221 + 5332 + 35107 + 82535 + 86024),
-  rating_1_star: 1221,
-  rating_2_star: 5332,
-  rating_3_star: 35107,
-  rating_4_star: 82535,
-  rating_5_star: 86024,
-  image_url: 'https://images.gr-assets.com/books/1388321463m/41804.jpg',
-  image_small_url: 'https://images.gr-assets.com/books/1388321463s/41804.jpg'
-};
-
-function matchParams(params: { isbn13: any; title: any; original_title: any; authors: any; publication_year: any }) {
-  return (
-    (params.isbn13 === defaultBook.isbn13 || params.isbn13 === '') &&
-    (params.title === defaultBook.title || params.title === '') &&
-    (params.original_title === defaultBook.original_title || params.original_title === '') &&
-    (params.authors === defaultBook.authors || params.authors === '') &&
-    (params.publication_year === defaultBook.publication_year || params.publication_year === '') &&
-    (params.isbn13 != '' || params.title != '' || params.original_title != '' || params.authors != '' || params.publication_year != '')
-  );
-}
+// function matchParams(
+//   params: { isbn13: any; title: any; original_title: any; authors: any; publication_year: any }
+// ) {
+//   return (
+//     (params.isbn13 === defaultBook.isbn13 || params.isbn13 === '') &&
+//     (params.title === defaultBook.title || params.title === '') &&
+//     (params.original_title === defaultBook.original_title || params.original_title === '') &&
+//     (params.authors === defaultBook.authors || params.authors === '') &&
+//     (params.publication_year === defaultBook.publication_year || params.publication_year === '') &&
+//     (params.isbn13 != '' || params.title != '' || params.original_title != '' || params.authors != '' || params.publication_year != '')
+//   );
+// }
 
 export default function GetBook({ onSuccess, onError }: { onSuccess: () => void; onError: (msg: string) => void }) {
   const router = useRouter();
@@ -46,11 +31,11 @@ export default function GetBook({ onSuccess, onError }: { onSuccess: () => void;
     <>
       <Formik
         initialValues={{
-          isbn13: '9780525951650',
-          title: 'Fall of Giants',
-          original_title: 'I, Robot (Robot #0.1)',
-          authors: 'Isaac Asimov',
-          publication_year: '2005',
+          isbn13: '',
+          title: '',
+          original_title: '',
+          authors: '',
+          publication_year: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -72,12 +57,7 @@ export default function GetBook({ onSuccess, onError }: { onSuccess: () => void;
           setSubmitting(true);
 
           try {
-            if (matchParams(params)) {
-              router.push(`/books/book/view?isbn13=${defaultBook.isbn13}`);
-              onSuccess();
-            } else {
-              throw new Error('Book not found');
-            }
+            router.push(`/books/book/view?isbn13=${params.isbn13}`);
           } catch (err: any) {
             setErrors({ submit: err.message });
           } finally {

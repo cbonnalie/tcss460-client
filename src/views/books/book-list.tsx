@@ -11,9 +11,10 @@ import { CircularProgress, Divider, List, Pagination, Stack } from '@mui/materia
 import axios from 'utils/axios';
 import { IBook } from 'types/book';
 import { BookListItem } from '../../components/BookListItem';
+import { useRouter } from 'next/navigation';
 
 const LoadingState = () => (
-  <Container component='main' maxWidth='md'>
+  <Container component="main" maxWidth="md">
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
       <CircularProgress />
     </Box>
@@ -21,27 +22,27 @@ const LoadingState = () => (
 );
 
 const ErrorState = ({ message }) => (
-  <Container component='main' maxWidth='md'>
+  <Container component="main" maxWidth="md">
     <Box sx={{ mt: 8, textAlign: 'center' }}>
-      <Typography color='error'>{message}</Typography>
+      <Typography color="error">{message}</Typography>
     </Box>
   </Container>
 );
 
 const EmptyState = () => (
   <Box sx={{ textAlign: 'center', mt: 4 }}>
-    <Typography variant='h6' color='text.secondary'>
+    <Typography variant="h6" color="text.secondary">
       No books found.
     </Typography>
   </Box>
 );
 
-const BooksList = ({ books }) => (
+const BooksList = ({ books, onBookClick }) => (
   <List>
     {books.map((book, index) => (
       <React.Fragment key={`book-${book.isbn13}`}>
-        <BookListItem book={book} />
-        {index < books.length - 1 && <Divider variant='middle' component='li' />}
+        <BookListItem book={book} onClick={() => onBookClick(book)} />
+        {index < books.length - 1 && <Divider variant="middle" component="li" />}
       </React.Fragment>
     ))}
   </List>
@@ -50,7 +51,7 @@ const BooksList = ({ books }) => (
 const PaginationControl = ({ pagination, onPageChange }) => (
   <Stack spacing={2} sx={{ my: 4, alignItems: 'center' }}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Typography variant='body2' color='text.secondary'>
+      <Typography variant="body2" color="text.secondary">
         Showing {pagination.page * pagination.limit - pagination.limit + 1}-
         {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} books
       </Typography>
@@ -59,7 +60,7 @@ const PaginationControl = ({ pagination, onPageChange }) => (
       count={pagination.totalPages}
       page={pagination.page}
       onChange={onPageChange}
-      color='primary'
+      color="primary"
       showFirstButton
       showLastButton
     />
@@ -84,6 +85,7 @@ const transformBookData = (bookData) => ({
 });
 
 export default function BookList() {
+  const router = useRouter();
   const [books, setBooks] = React.useState<IBook[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -93,6 +95,11 @@ export default function BookList() {
     total: 0,
     totalPages: 0
   });
+
+  const handleBookClick = useCallback((book) => {
+    const isbn13 = book.isbn13;
+    router.push(`/books/book/view?isbn13=${isbn13}`);
+  }, [router]);
 
   const fetchBooks = useCallback(async (page: number) => {
     setLoading(true);
@@ -137,7 +144,7 @@ export default function BookList() {
   }
 
   return (
-    <Container component='main' maxWidth='md'>
+    <Container component="main" maxWidth="md">
       <CssBaseline />
       <Box
         sx={{
@@ -149,7 +156,11 @@ export default function BookList() {
         <Box sx={{ mt: 1, width: '100%' }}>
           {books.length > 0 ? (
             <>
-              <BooksList books={books} />
+              <BooksList
+                books={books}
+                onBookClick={handleBookClick}
+              />
+
               <PaginationControl
                 pagination={pagination}
                 onPageChange={handlePageChange}

@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -15,54 +15,48 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import { IBook } from '/types/book';
+import axios from 'utils/axios';
 
 const defaultTheme = createTheme();
 
-interface Book {
-  isbn13: string;
-  title: string;
-  original_title: string;
-  authors: string;
-  publication_year: string;
-  rating_avg: number;
-  rating_count: number;
-  rating_1_star: number;
-  rating_2_star: number;
-  rating_3_star: number;
-  rating_4_star: number;
-  rating_5_star: number;
-  image_url: string;
-  image_small_url: string;
-}
-
-const defaultBook = {
-  isbn13: '9780525951650',
-  title: 'Fall of Giants',
-  original_title: 'I, Robot (Robot #0.1)',
-  authors: 'Isaac Asimov',
-  publication_year: '2005',
-  rating_avg: (1221 * 1 + 5332 * 2 + 35107 * 3 + 82535 * 4 + 86024 * 5) / (1221 + 5332 + 35107 + 82535 + 86024),
-  rating_count: 1221 + 5332 + 35107 + 82535 + 86024,
-  rating_1_star: 1221,
-  rating_2_star: 5332,
-  rating_3_star: 35107,
-  rating_4_star: 82535,
-  rating_5_star: 86024,
-  image_url: 'https://images.gr-assets.com/books/1388321463m/41804.jpg',
-  image_small_url: 'https://images.gr-assets.com/books/1388321463s/41804.jpg'
-};
-
+const transformBookData = (bookData) => ({
+  isbn13: bookData.isbn13,
+  authors: bookData.authors.split(', '),
+  publication: bookData.publication,
+  original_title: bookData.original_title,
+  title: bookData.title,
+  average: bookData.ratings.average,
+  count: bookData.ratings.count,
+  rating_1: bookData.ratings.rating_1,
+  rating_2: bookData.ratings.rating_2,
+  rating_3: bookData.ratings.rating_3,
+  rating_4: bookData.ratings.rating_4,
+  rating_5: bookData.ratings.rating_5,
+  large: bookData.icons.large,
+  small: bookData.icons.small
+});
 export default function BookViewPage() {
   const searchParams = useSearchParams();
   const isbn = searchParams.get('isbn13');
-
-  const [book, setBook] = useState<Book | null>(null);
+  const [book, setBook] = useState<IBook | null>(null);
 
   useEffect(() => {
-    if (isbn === defaultBook.isbn13) {
-      setBook(defaultBook);
-    } else {
-      setBook(null);
+    const fetchBook = async () => {
+      try {
+        const response = await axios.get(`/books/isbn`, {
+          params: { isbn: isbn }
+        });
+        const transformedBook = transformBookData(response.data);
+        setBook(transformedBook);
+      } catch (error) {
+        console.error('Error fetching book:', error);
+        setBook(null);
+      }
+    };
+
+    if (isbn) {
+      fetchBook().then();
     }
   }, [isbn]);
 
@@ -94,19 +88,19 @@ export default function BookViewPage() {
             <ImportContactsIcon />
           </Avatar>
           <Box sx={{ mt: 2 }}>
-            <img src={book.image_url} alt={book.title} style={{ maxWidth: '100%', height: 'auto' }} />
+            <img src={book.large} alt={book.title} style={{ maxWidth: '100%', height: 'auto' }} />
           </Box>
           <Typography component="h1" variant="h5">
             {book.title}
           </Typography>
           <Typography sx={{ mt: 1 }}>
-            <strong>Author:</strong> {book.authors}
+            <strong>Author:</strong> {book.authors.join(', ')}
           </Typography>
           <Typography>
             <strong>Original Title:</strong> {book.original_title}
           </Typography>
           <Typography>
-            <strong>Publication Year:</strong> {book.publication_year}
+            <strong>Publication Year:</strong> {book.publication}
           </Typography>
           <RatingSummary book={book} />
         </Box>
@@ -115,14 +109,14 @@ export default function BookViewPage() {
   );
 }
 
-function RatingSummary({ book }: { book: Book }) {
+function RatingSummary({ book }: { book: IBook }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editableData, setEditableData] = useState({
-    rating_1_star: book.rating_1_star,
-    rating_2_star: book.rating_2_star,
-    rating_3_star: book.rating_3_star,
-    rating_4_star: book.rating_4_star,
-    rating_5_star: book.rating_5_star
+    rating_1_star: book.rating_1,
+    rating_2_star: book.rating_2,
+    rating_3_star: book.rating_3,
+    rating_4_star: book.rating_4,
+    rating_5_star: book.rating_5
   });
 
   const totalRatings =
@@ -155,7 +149,8 @@ function RatingSummary({ book }: { book: Book }) {
     return (
       <>
         {[...Array(5)].map((_, i) =>
-          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> : <StarBorderIcon key={i} color="disabled" fontSize="small" />
+          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> :
+            <StarBorderIcon key={i} color="disabled" fontSize="small" />
         )}
       </>
     );
@@ -166,10 +161,22 @@ function RatingSummary({ book }: { book: Book }) {
     setEditableData((prev) => ({ ...prev, [key]: intValue }));
   };
 
-  const handleSave = () => {
-    Object.assign(defaultBook, editableData);
-    defaultBook.rating_avg = avgRating;
-    defaultBook.rating_count = totalRatings;
+  const handleSave = async () => {
+
+    try {
+      await axios.put(`/books/ratings`, {
+        isbn13: book.isbn13,
+        rating_1_star: editableData.rating_1_star,
+        rating_2_star: editableData.rating_2_star,
+        rating_3_star: editableData.rating_3_star,
+        rating_4_star: editableData.rating_4_star,
+        rating_5_star: editableData.rating_5_star
+      }).then();
+
+    } catch (error) {
+      console.error('Error saving ratings:', error);
+      alert('Failed to save ratings. Please try again later.');
+    }
 
     setIsEditing(false);
   };
