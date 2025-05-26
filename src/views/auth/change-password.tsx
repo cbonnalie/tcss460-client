@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 // project import
 import AuthWrapper from 'sections/auth/AuthWrapper';
 import AuthPasswordChange from 'components/cards/AuthPasswordChange';
-import AuthFooter from 'components/cards/AuthFooter';
 
 // ================================|| CHANGE PASSWORD ||================================ //
 
