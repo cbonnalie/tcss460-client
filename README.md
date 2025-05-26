@@ -20,3 +20,6 @@
 - Kaleb
     - Created page to search for a single book.
     - Created page to view a single book and edit its ratings data.
+- Mark
+    - Created a form to allow a user to change password
+    - Created the ui for changing password
