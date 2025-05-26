@@ -82,7 +82,7 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           username: Yup.string()
             .max(255)
             .min(3, 'Username must be greater or equal to 3 characters')
-            .test('no-leading-trailing-whitespace', 'Username cannot start or end with spaces', (value) => value === value.trim())
+            .test('no-leading-trailing-whitespace', 'Username cannot start or end with spaces', (value) => value === value?.trim())
             .required('Username is required')
         })}
         onSubmit={async (values, { setErrors, setSubmitting }) => {
