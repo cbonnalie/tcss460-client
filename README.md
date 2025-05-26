@@ -23,3 +23,6 @@
 - Mark
     - Created a form to allow a user to change password
     - Created the ui for changing password
+- Noah
+    - Updated the register/login form to match the 3rd-party Auth API registration/login requirements and tested.
+    - Adjustments to authOptions.tsx to work with the 3rd-party Web API. 
