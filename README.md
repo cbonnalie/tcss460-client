@@ -17,3 +17,6 @@
 - Christian
     - Linked front end to API.
     - Created page to view all books with pagination.
+- Kaleb
+    - Created page to search for a single book.
+    - Created page to view a single book and edit its ratings data.
