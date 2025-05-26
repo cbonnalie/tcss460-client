@@ -9,3 +9,11 @@
 
 - Christian
     - Set up repository and hosted client on Vercel.
+ 
+## Beta Sprint
+
+### Contribution
+
+- Christian
+    - Linked front end to API.
+    - Created page to view all books with pagination.
