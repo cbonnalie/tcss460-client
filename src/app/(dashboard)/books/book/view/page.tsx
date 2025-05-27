@@ -149,8 +149,7 @@ function RatingSummary({ book }: { book: IBook }) {
     return (
       <>
         {[...Array(5)].map((_, i) =>
-          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> :
-            <StarBorderIcon key={i} color="disabled" fontSize="small" />
+          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> : <StarBorderIcon key={i} color="disabled" fontSize="small" />
         )}
       </>
     );
@@ -162,17 +161,17 @@ function RatingSummary({ book }: { book: IBook }) {
   };
 
   const handleSave = async () => {
-
     try {
-      await axios.put(`/books/ratings`, {
-        isbn13: book.isbn13,
-        rating_1_star: editableData.rating_1_star,
-        rating_2_star: editableData.rating_2_star,
-        rating_3_star: editableData.rating_3_star,
-        rating_4_star: editableData.rating_4_star,
-        rating_5_star: editableData.rating_5_star
-      }).then();
-
+      await axios
+        .put(`/books/ratings`, {
+          isbn13: book.isbn13,
+          rating_1_star: editableData.rating_1_star,
+          rating_2_star: editableData.rating_2_star,
+          rating_3_star: editableData.rating_3_star,
+          rating_4_star: editableData.rating_4_star,
+          rating_5_star: editableData.rating_5_star
+        })
+        .then();
     } catch (error) {
       console.error('Error saving ratings:', error);
       alert('Failed to save ratings. Please try again later.');

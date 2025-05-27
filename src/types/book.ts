@@ -1,5 +1,4 @@
-﻿
-export interface IBook {
+﻿export interface IBook {
   isbn13: string;
   authors: string[];
   publication: number;

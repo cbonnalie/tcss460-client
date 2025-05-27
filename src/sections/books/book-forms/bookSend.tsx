@@ -11,14 +11,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import AnimateButton from '../../../components/@extended/AnimateButton';
 import Button from '@mui/material/Button';
 
-export default function SendBook(
-  {
-    onSuccess,
-    onError
-  }: {
-    onSuccess: () => void;
-    onError: (msg: string) => void;
-  }) {
+export default function SendBook({ onSuccess, onError }: { onSuccess: () => void; onError: (msg: string) => void }) {
   return (
     <>
       <Formik
@@ -52,9 +45,8 @@ export default function SendBook(
               rating_3_star: 0,
               rating_4_star: 0,
               rating_5_star: 0,
-              image_url: "",
-              "image_small_url": ""
-
+              image_url: '',
+              image_small_url: ''
             })
             .then((response) => {
               setSubmitting(false);
@@ -194,15 +186,7 @@ export default function SendBook(
 
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button
-                    disableElevation
-                    disabled={isSubmitting}
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                     ADD BOOK
                   </Button>
                 </AnimateButton>

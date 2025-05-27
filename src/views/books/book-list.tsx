@@ -78,8 +78,8 @@ const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPag
   <Stack spacing={2} sx={{ my: 4, alignItems: 'center' }}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
       <Typography variant="body2" color="text.secondary">
-        Showing {pagination.page * pagination.limit - pagination.limit + 1}-
-        {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} books
+        Showing {pagination.page * pagination.limit - pagination.limit + 1}-{Math.min(pagination.page * pagination.limit, pagination.total)}{' '}
+        of {pagination.total} books
       </Typography>
     </Box>
     <Pagination
@@ -125,34 +125,40 @@ export default function BookList() {
     totalPages: 0
   });
 
-  const handleBookClick = useCallback((book: IBook) => {
-    const isbn13 = book.isbn13;
-    router.push(`/books/book/view?isbn13=${isbn13}`);
-  }, [router]);
+  const handleBookClick = useCallback(
+    (book: IBook) => {
+      const isbn13 = book.isbn13;
+      router.push(`/books/book/view?isbn13=${isbn13}`);
+    },
+    [router]
+  );
 
-  const fetchBooks = useCallback(async (page: number) => {
-    setLoading(true);
-    try {
-      const response = await axios.get('/books/all', {
-        params: { page, limit: pagination.limit }
-      });
+  const fetchBooks = useCallback(
+    async (page: number) => {
+      setLoading(true);
+      try {
+        const response = await axios.get('/books/all', {
+          params: { page, limit: pagination.limit }
+        });
 
-      const transformedBooks: IBook[] = response.data.books.map(transformBookData);
+        const transformedBooks: IBook[] = response.data.books.map(transformBookData);
 
-      setBooks(transformedBooks);
-      setPagination({
-        page: response.data.page,
-        limit: response.data.limit,
-        total: response.data.total,
-        totalPages: Math.ceil(response.data.total / response.data.limit)
-      });
-    } catch (error) {
-      console.error('Error fetching books:', error);
-      setError('Failed to load books. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  }, [pagination.limit]);
+        setBooks(transformedBooks);
+        setPagination({
+          page: response.data.page,
+          limit: response.data.limit,
+          total: response.data.total,
+          totalPages: Math.ceil(response.data.total / response.data.limit)
+        });
+      } catch (error) {
+        console.error('Error fetching books:', error);
+        setError('Failed to load books. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    },
+    [pagination.limit]
+  );
 
   useEffect(() => {
     fetchBooks(pagination.page).then();
@@ -160,7 +166,7 @@ export default function BookList() {
 
   const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
     if (page !== pagination.page) {
-      setPagination(prev => ({ ...prev, page }));
+      setPagination((prev) => ({ ...prev, page }));
     }
   };
 
@@ -185,15 +191,9 @@ export default function BookList() {
         <Box sx={{ mt: 1, width: '100%' }}>
           {books.length > 0 ? (
             <>
-              <BooksList
-                books={books}
-                onBookClick={handleBookClick}
-              />
+              <BooksList books={books} onBookClick={handleBookClick} />
 
-              <PaginationControl
-                pagination={pagination}
-                onPageChange={handlePageChange}
-              />
+              <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
             </>
           ) : (
             <EmptyState />

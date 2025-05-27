@@ -27,7 +27,6 @@ const EMPTY_ALERT: IAlert = {
 };
 
 export default function BookGet() {
-
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
 
   const onSuccess = () => {

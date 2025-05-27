@@ -20,7 +20,7 @@ export default function AuthPasswordChange() {
       confirmPassword: ''
     },
     validationSchema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       console.log('Submit:', values);
       // TODO: Connect to API
     }
@@ -39,7 +39,7 @@ export default function AuthPasswordChange() {
         error={formik.touched.currentPassword && Boolean(formik.errors.currentPassword)}
         helperText={formik.touched.currentPassword && formik.errors.currentPassword}
       />
-      
+
       <TextField
         fullWidth
         margin="normal"
@@ -51,7 +51,7 @@ export default function AuthPasswordChange() {
         error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
         helperText={formik.touched.newPassword && formik.errors.newPassword}
       />
-      
+
       <TextField
         fullWidth
         margin="normal"
@@ -64,12 +64,7 @@ export default function AuthPasswordChange() {
         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
 
-      <Button 
-        type="submit" 
-        fullWidth 
-        variant="contained" 
-        sx={{ mt: 3 }}
-      >
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
         Update Password
       </Button>
     </Box>

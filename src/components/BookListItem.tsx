@@ -3,22 +3,11 @@ import { IBook } from 'types/book';
 import ListItemButton from '@mui/material/ListItemButton';
 
 function BookAvatar({ image, title }: { image: string; title: string }) {
-  return (
-    <Avatar
-      variant="rounded"
-      src={image}
-      alt={title}
-      sx={{ width: 60, height: 90, mr: 2 }}
-    />
-  );
+  return <Avatar variant="rounded" src={image} alt={title} sx={{ width: 60, height: 90, mr: 2 }} />;
 }
 
 // Info component
-function BookInfo({ title, authors, publication }: {
-  title: string;
-  authors: string[];
-  publication: number;
-}) {
+function BookInfo({ title, authors, publication }: { title: string; authors: string[]; publication: number }) {
   return (
     <>
       <Typography variant="subtitle1" component="div" fontWeight="bold">
@@ -36,12 +25,7 @@ function BookInfo({ title, authors, publication }: {
 function BookRating({ average, count }: { average: number; count: number }) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Rating
-        value={average}
-        precision={0.1}
-        readOnly
-        size="small"
-      />
+      <Rating value={average} precision={0.1} readOnly size="small" />
 
       <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
         {average.toFixed(1)} ({count.toLocaleString()} ratings)
@@ -51,35 +35,17 @@ function BookRating({ average, count }: { average: number; count: number }) {
 }
 
 // Main component
-export function BookListItem({ book, onClick }: { book: IBook, onClick?: (book: IBook) => void }) {
-
+export function BookListItem({ book, onClick }: { book: IBook; onClick?: (book: IBook) => void }) {
   return (
     <ListItem disablePadding>
-      <ListItemButton
-        alignItems="flex-start"
-        sx={{ py: 2 }}
-        onClick={() => onClick?.(book)}
-      >
+      <ListItemButton alignItems="flex-start" sx={{ py: 2 }} onClick={() => onClick?.(book)}>
+        <BookAvatar image={book.small} title={book.title} />
 
-      <BookAvatar
-        image={book.small}
-        title={book.title}
-      />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <BookInfo title={book.title} authors={book.authors} publication={book.publication} />
 
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-
-        <BookInfo
-          title={book.title}
-          authors={book.authors}
-          publication={book.publication}
-        />
-
-        <BookRating
-          average={book.average}
-          count={book.count}
-        />
-
-      </Box>
+          <BookRating average={book.average} count={book.count} />
+        </Box>
       </ListItemButton>
     </ListItem>
   );
