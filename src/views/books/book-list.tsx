@@ -37,7 +37,12 @@ const EmptyState = () => (
   </Box>
 );
 
-const BooksList = ({ books, onBookClick }) => (
+interface BooksListProps {
+  books: IBook[];
+  onBookClick: (book: IBook) => void;
+}
+
+const BooksList: React.FC<BooksListProps> = ({ books, onBookClick }) => (
   <List>
     {books.map((book, index) => (
       <React.Fragment key={`book-${book.isbn13}`}>
@@ -48,7 +53,17 @@ const BooksList = ({ books, onBookClick }) => (
   </List>
 );
 
-const PaginationControl = ({ pagination, onPageChange }) => (
+interface PaginationControlProps {
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+  onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
+}
+
+const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPageChange }) => (
   <Stack spacing={2} sx={{ my: 4, alignItems: 'center' }}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
       <Typography variant="body2" color="text.secondary">
