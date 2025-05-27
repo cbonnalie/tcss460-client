@@ -21,7 +21,7 @@ const LoadingState = () => (
   </Container>
 );
 
-const ErrorState = ({ message }) => (
+const ErrorState = ({ message }): any => (
   <Container component="main" maxWidth="md">
     <Box sx={{ mt: 8, textAlign: 'center' }}>
       <Typography color="error">{message}</Typography>
