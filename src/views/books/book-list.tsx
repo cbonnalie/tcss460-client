@@ -70,7 +70,7 @@ interface PaginationInfo {
 }
 
 interface PaginationControlProps {
-  pagination: Pagination;
+  pagination: PaginationInfo;
   onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
