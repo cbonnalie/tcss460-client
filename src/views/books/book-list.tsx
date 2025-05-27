@@ -13,6 +13,7 @@ import { IBook } from 'types/book';
 import { BookListItem } from '../../components/BookListItem';
 import { useRouter } from 'next/navigation';
 
+// loading UI
 const LoadingState = () => (
   <Container component="main" maxWidth="md">
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
@@ -21,7 +22,12 @@ const LoadingState = () => (
   </Container>
 );
 
-const ErrorState = ({ message }: any) => (
+// error UI
+interface ErrorStateProps {
+  message: string;
+}
+
+const ErrorState: React.FC<ErrorStateProps> = ({ message }) => (
   <Container component="main" maxWidth="md">
     <Box sx={{ mt: 8, textAlign: 'center' }}>
       <Typography color="error">{message}</Typography>
@@ -29,6 +35,7 @@ const ErrorState = ({ message }: any) => (
   </Container>
 );
 
+// empty UI
 const EmptyState = () => (
   <Box sx={{ textAlign: 'center', mt: 4 }}>
     <Typography variant="h6" color="text.secondary">
@@ -37,6 +44,7 @@ const EmptyState = () => (
   </Box>
 );
 
+// books list
 interface BooksListProps {
   books: IBook[];
   onBookClick: (book: IBook) => void;
@@ -53,13 +61,16 @@ const BooksList: React.FC<BooksListProps> = ({ books, onBookClick }) => (
   </List>
 );
 
+// pagination
+interface PaginationInfo {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
 interface PaginationControlProps {
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
+  pagination: Pagination;
   onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
@@ -82,6 +93,7 @@ const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPag
   </Stack>
 );
 
+// transform helper function
 const transformBookData = (bookData: any) => ({
   isbn13: bookData.isbn13,
   authors: bookData.authors.split(', '),
@@ -99,8 +111,10 @@ const transformBookData = (bookData: any) => ({
   small: bookData.icons.small
 });
 
+// main component
 export default function BookList() {
   const router = useRouter();
+
   const [books, setBooks] = React.useState<IBook[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -111,7 +125,7 @@ export default function BookList() {
     totalPages: 0
   });
 
-  const handleBookClick = useCallback((book) => {
+  const handleBookClick = useCallback((book: IBook) => {
     const isbn13 = book.isbn13;
     router.push(`/books/book/view?isbn13=${isbn13}`);
   }, [router]);
@@ -144,7 +158,7 @@ export default function BookList() {
     fetchBooks(pagination.page).then();
   }, [fetchBooks, pagination.page]);
 
-  const handlePageChange = (_event, page: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
     if (page !== pagination.page) {
       setPagination(prev => ({ ...prev, page }));
     }
