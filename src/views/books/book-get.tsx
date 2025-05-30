@@ -12,7 +12,8 @@ import BookIcon from '@mui/icons-material/AutoStoriesOutlined';
 import GetBook from '../../sections/books/book-forms/bookGet';
 import Avatar from '@mui/material/Avatar';
 
-const defaultTheme = createTheme();
+import { useTheme } from '@mui/material/styles';
+import { ThemeMode } from 'config';
 
 interface IAlert {
   showAlert: boolean;
@@ -28,6 +29,7 @@ const EMPTY_ALERT: IAlert = {
 
 export default function BookGet() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
+  const theme = useTheme();
 
   const onSuccess = () => {
     setAlert({
@@ -46,7 +48,7 @@ export default function BookGet() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       {alert.showAlert && (
         <Alert severity={alert.alertSeverity as any} onClose={() => setAlert(EMPTY_ALERT)}>
           {alert.alertMessage}
@@ -58,7 +60,8 @@ export default function BookGet() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center'
+            alignItems: 'center',
+            color: theme.palette.mode === ThemeMode.DARK ? '#grey.A800' : '#ffffff'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -73,6 +76,6 @@ export default function BookGet() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

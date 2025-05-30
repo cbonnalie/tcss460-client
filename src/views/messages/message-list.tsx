@@ -8,7 +8,7 @@ import EmailIcon from '@mui/icons-material/Email';
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Divider, List } from '@mui/material';
 
 // project import
@@ -16,12 +16,13 @@ import axios from 'utils/axios';
 import { IMessage } from 'types/message';
 import PrioritySelector from 'components/PrioritySelector';
 import { NoMessage, MessageListItem } from 'components/MessageListItem';
-
-const defaultTheme = createTheme();
+import {useTheme} from '@mui/material/styles';
+import {ThemeMode} from 'config';
 
 export default function MessagesList() {
   const [messages, setMessages] = React.useState<IMessage[]>([]);
   const [priority, setPriority] = React.useState(0);
+  const theme = useTheme();
 
   React.useEffect(() => {
     axios
@@ -48,12 +49,19 @@ export default function MessagesList() {
     .map((msg, index, messages) => (
       <React.Fragment key={'msg list item: ' + index}>
         <MessageListItem message={msg} onDelete={handleDelete} />
-        {index < messages.length - 1 && <Divider variant="middle" component="li" />}
+        {index < messages.length - 1 && (
+          <Divider
+            sx={{
+              borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800',
+            }}
+            variant="middle"
+            component="li"
+          />
+        )}
       </React.Fragment>
     ));
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="md">
         <CssBaseline />
         <Box
@@ -76,6 +84,5 @@ export default function MessagesList() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

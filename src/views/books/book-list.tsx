@@ -12,6 +12,9 @@ import axios from 'utils/axios';
 import { IBook } from 'types/book';
 import { BookListItem } from '../../components/BookListItem';
 import { useRouter } from 'next/navigation';
+import { useTheme } from '@mui/material/styles';
+import { ThemeMode } from 'config';
+import { boolean } from 'yup';
 
 // loading UI
 const LoadingState = () => (
@@ -46,16 +49,25 @@ const EmptyState = () => (
 
 // books list
 interface BooksListProps {
-  books: IBook[];
-  onBookClick: (book: IBook) => void;
+  books: IBook[],
+  onBookClick: (book: IBook) => void,
+  isDarkTheme: boolean
 }
 
-const BooksList: React.FC<BooksListProps> = ({ books, onBookClick }) => (
+const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, isDarkTheme }) => (
   <List>
     {books.map((book, index) => (
       <React.Fragment key={`book-${book.isbn13}`}>
         <BookListItem book={book} onClick={() => onBookClick(book)} />
-        {index < books.length - 1 && <Divider variant="middle" component="li" />}
+        {index < books.length - 1 && (
+          <Divider
+            variant="middle"
+            component="li"
+            sx={{
+              borderColor: isDarkTheme ? '#ffffff' : 'grey.A800'
+            }}
+          />
+        )}
       </React.Fragment>
     ))}
   </List>
@@ -125,6 +137,8 @@ export default function BookList() {
     totalPages: 0
   });
 
+  const theme = useTheme();
+
   const handleBookClick = useCallback(
     (book: IBook) => {
       const isbn13 = book.isbn13;
@@ -191,7 +205,7 @@ export default function BookList() {
         <Box sx={{ mt: 1, width: '100%' }}>
           {books.length > 0 ? (
             <>
-              <BooksList books={books} onBookClick={handleBookClick} />
+              <BooksList books={books} onBookClick={handleBookClick} isDarkTheme={theme.palette.mode === ThemeMode.DARK} />
 
               <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
             </>
