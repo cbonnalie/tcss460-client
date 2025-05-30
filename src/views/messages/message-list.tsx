@@ -78,8 +78,8 @@ export default function MessagesList() {
           <Typography component="h1" variant="h5">
             Read Messages
           </Typography>
-          <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
           <Box sx={{ mt: 1 }}>
+            <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
             <List>{messagesAsComponents.length ? messagesAsComponents : <NoMessage />}</List>
           </Box>
         </Box>

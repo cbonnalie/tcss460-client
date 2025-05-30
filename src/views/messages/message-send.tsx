@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Alert } from '@mui/material';
 
 // Project imports
@@ -15,8 +15,6 @@ import PrioritySelector from 'components/PrioritySelector';
 import SendMessage from 'sections/messages/message-forms/messageSend';
 import { useTheme } from '@mui/material/styles';
 import { ThemeMode } from 'config';
-
-const defaultTheme = createTheme();
 
 interface IAlert {
   showAlert: boolean;
@@ -67,8 +65,7 @@ export default function MessageSend() {
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            color: theme.palette.mode === ThemeMode.DARK ? '#grey.A800' : '#ffffff'
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
