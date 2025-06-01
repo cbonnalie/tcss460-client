@@ -53,7 +53,7 @@ const other: NavItemType = {
     },
     {
       id: 'change-password',
-      title: <FormattedMessage id="change-password" />,
+      title: <FormattedMessage id="Change Password" />,
       type: 'item',
       url: '/change-pass',
       icon: icons.LockOutlined
