@@ -6,6 +6,7 @@ import BookOutlined from '@ant-design/icons/BookOutlined';
 import AddIcon from '@mui/icons-material/AddCircle';
 import ViewIcon from '@mui/icons-material/RemoveRedEye';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+import Delete from '@mui/icons-material/Delete';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -15,7 +16,8 @@ const icons = {
   BookOutlined,
   AddIcon,
   ViewIcon,
-  ImportContactsIcon
+  ImportContactsIcon,
+  Delete
 };
 
 // ==============================|| MENU ITEMS - BOOKS ||============================== //
@@ -46,6 +48,13 @@ const books: NavItemType = {
       type: 'item',
       url: '/books/list/all',
       icon: icons.ViewIcon
+    },
+    {
+      id: 'delete-books',
+      title: <FormattedMessage id="Delete Book" />,
+      type: 'item',
+      url: '/books/delete',
+      icon: icons.Delete
     }
   ]
 };
