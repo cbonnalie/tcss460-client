@@ -49,9 +49,9 @@ const EmptyState = () => (
 
 // books list
 interface BooksListProps {
-  books: IBook[],
-  onBookClick: (book: IBook) => void,
-  isDarkTheme: boolean
+  books: IBook[];
+  onBookClick: (book: IBook) => void;
+  isDarkTheme: boolean;
 }
 
 const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, isDarkTheme }) => (

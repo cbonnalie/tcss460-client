@@ -16,8 +16,8 @@ import axios from 'utils/axios';
 import { IMessage } from 'types/message';
 import PrioritySelector from 'components/PrioritySelector';
 import { NoMessage, MessageListItem } from 'components/MessageListItem';
-import {useTheme} from '@mui/material/styles';
-import {ThemeMode} from 'config';
+import { useTheme } from '@mui/material/styles';
+import { ThemeMode } from 'config';
 
 export default function MessagesList() {
   const [messages, setMessages] = React.useState<IMessage[]>([]);
@@ -52,7 +52,7 @@ export default function MessagesList() {
         {index < messages.length - 1 && (
           <Divider
             sx={{
-              borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800',
+              borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800'
             }}
             variant="middle"
             component="li"
@@ -62,27 +62,27 @@ export default function MessagesList() {
     ));
 
   return (
-      <Container component="main" maxWidth="md">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <EmailIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Read Messages
-          </Typography>
-          <Box sx={{ mt: 1 }}>
-            <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
-            <List>{messagesAsComponents.length ? messagesAsComponents : <NoMessage />}</List>
-          </Box>
+    <Container component="main" maxWidth="md">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <EmailIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Read Messages
+        </Typography>
+        <Box sx={{ mt: 1 }}>
+          <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
+          <List>{messagesAsComponents.length ? messagesAsComponents : <NoMessage />}</List>
         </Box>
-      </Container>
+      </Box>
+    </Container>
   );
 }

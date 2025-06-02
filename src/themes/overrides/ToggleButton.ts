@@ -18,8 +18,8 @@ export default function ToggleButton(theme: Theme) {
             outlineOffset: 2
           },
           '&.MuiToggleButton-standard': {
-            borderColor: theme.palette.mode === ThemeMode.DARK ? '#595959' : '#D9D9D9',
-          },
+            borderColor: theme.palette.mode === ThemeMode.DARK ? '#595959' : '#D9D9D9'
+          }
         }
       }
     }

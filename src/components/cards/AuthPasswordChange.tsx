@@ -2,7 +2,7 @@
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import axiosServices from '../../utils/axios'; 
+import axiosServices from '../../utils/axios';
 
 const validationSchema = Yup.object({
   currentPassword: Yup.string().required('Current password is required'),
@@ -39,7 +39,7 @@ export default function AuthPasswordChange() {
         }
       } catch (error: any) {
         let message = 'Password change failed. Please try again.';
-        
+
         if (error.response) {
           if (error.response.status === 401) {
             message = 'Current password is incorrect';
@@ -49,7 +49,7 @@ export default function AuthPasswordChange() {
         } else if (error.message) {
           message = error.message;
         }
-        
+
         setStatus({ error: message });
       } finally {
         setSubmitting(false);
@@ -107,14 +107,7 @@ export default function AuthPasswordChange() {
         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
 
-      <Button 
-        type="submit" 
-        fullWidth 
-        variant="contained" 
-        color="primary"
-        sx={{ mt: 3 }}
-        disabled={formik.isSubmitting}
-      >
+      <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3 }} disabled={formik.isSubmitting}>
         {formik.isSubmitting ? 'Updating...' : 'Update Password'}
       </Button>
     </Box>

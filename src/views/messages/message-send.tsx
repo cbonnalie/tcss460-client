@@ -76,10 +76,7 @@ export default function MessageSend() {
           </Typography>
 
           <Box sx={{ mt: 1 }}>
-            <PrioritySelector
-              initialValue={priority}
-              onClick={handlePriorityClick}
-            />
+            <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
             <SendMessage priority={priority} onSuccess={onSuccess} onError={onError} />
           </Box>
         </Box>

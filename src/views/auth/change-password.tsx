@@ -19,9 +19,7 @@ export default function ChangePassword() {
           <Typography variant="h3" mt={1}>
             Change Password
           </Typography>
-          <Typography color="text.secondary">
-            Update your account password
-          </Typography>
+          <Typography color="text.secondary">Update your account password</Typography>
         </Grid>
 
         <Grid item xs={12}>

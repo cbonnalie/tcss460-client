@@ -14,14 +14,7 @@ export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => vo
       <Grid item xs={12}>
         <Stack spacing={1}>
           <InputLabel htmlFor="isbn13">ISBN-13</InputLabel>
-          <OutlinedInput 
-            id="" 
-            type="text" 
-            placeholder="Placeholder" 
-            fullWidth 
-            disabled 
-            value="Delete book by ISBN-13" 
-          />
+          <OutlinedInput id="" type="text" placeholder="Placeholder" fullWidth disabled value="Delete book by ISBN-13" />
         </Stack>
       </Grid>
 
@@ -38,28 +31,14 @@ export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => vo
       <Grid item xs={6}>
         <Stack spacing={1}>
           <InputLabel htmlFor="startYear">Starting Year</InputLabel>
-          <OutlinedInput
-            id=""
-            type="text"
-            placeholder="Placeholder"
-            fullWidth
-            disabled
-            value="Starting Year"
-          />
+          <OutlinedInput id="" type="text" placeholder="Placeholder" fullWidth disabled value="Starting Year" />
         </Stack>
       </Grid>
 
       <Grid item xs={6}>
         <Stack spacing={1}>
           <InputLabel htmlFor="endYear">Ending Year</InputLabel>
-          <OutlinedInput
-            id=""
-            type="text"
-            placeholder="Placeholder"
-            fullWidth
-            disabled
-            value="Ending Year"
-          />
+          <OutlinedInput id="" type="text" placeholder="Placeholder" fullWidth disabled value="Ending Year" />
         </Stack>
       </Grid>
 
