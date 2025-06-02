@@ -3,7 +3,6 @@
 
 // Imports
 import * as React from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -13,7 +12,8 @@ import { Alert } from '@mui/material';
 import DeleteBook from '../../sections/books/book-forms/bookDelete';
 import Typography from '@mui/material/Typography';
 
-const defaultTheme = createTheme();
+import { useTheme } from '@mui/material/styles';
+import { ThemeMode } from 'config';
 
 interface IAlert {
   showAlert: boolean;
@@ -29,6 +29,8 @@ const EMPTY_ALERT: IAlert = {
 
 export default function BooksDelete() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
   const onSuccess = () => {
     setAlert({
       showAlert: true,
@@ -45,7 +47,7 @@ export default function BooksDelete() {
     });
   };
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       {alert.showAlert && (
         <Alert severity={alert.alertSeverity as any} onClose={() => setAlert(EMPTY_ALERT)}>
           {alert.alertMessage}
@@ -60,7 +62,10 @@ export default function BooksDelete() {
             alignItems: 'center'
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{
+            m: 1,
+            bgcolor: isDarkMode ? 'secondary.main' : 'primary.main'
+          }}>
             <TrashIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -71,6 +76,6 @@ export default function BooksDelete() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }

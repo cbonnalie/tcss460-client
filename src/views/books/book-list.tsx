@@ -14,7 +14,6 @@ import { BookListItem } from '../../components/BookListItem';
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@mui/material/styles';
 import { ThemeMode } from 'config';
-// import { boolean } from 'yup';
 
 // loading UI
 const LoadingState = () => (
@@ -64,7 +63,7 @@ const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, isDarkTheme }
             variant="middle"
             component="li"
             sx={{
-              borderColor: isDarkTheme ? '#ffffff' : 'grey.A800'
+              borderColor: isDarkTheme ? 'secondary.main' : 'grey.300',
             }}
           />
         )}
@@ -86,7 +85,7 @@ interface PaginationControlProps {
   onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPageChange }) => (
+const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPageChange, isDarkTheme }) => (
   <Stack spacing={2} sx={{ my: 4, alignItems: 'center' }}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
       <Typography variant="body2" color="text.secondary">
@@ -98,7 +97,7 @@ const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPag
       count={pagination.totalPages}
       page={pagination.page}
       onChange={onPageChange}
-      color="primary"
+      color={(isDarkTheme ? 'secondary' : 'primary') as 'primary' | 'secondary'}
       showFirstButton
       showLastButton
     />
@@ -138,6 +137,7 @@ export default function BookList() {
   });
 
   const theme = useTheme();
+  const isDarkTheme = theme.palette.mode === ThemeMode.DARK;
 
   const handleBookClick = useCallback(
     (book: IBook) => {
@@ -205,9 +205,9 @@ export default function BookList() {
         <Box sx={{ mt: 1, width: '100%' }}>
           {books.length > 0 ? (
             <>
-              <BooksList books={books} onBookClick={handleBookClick} isDarkTheme={theme.palette.mode === ThemeMode.DARK} />
+              <BooksList books={books} onBookClick={handleBookClick} isDarkTheme={isDarkTheme} />
 
-              <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
+              <PaginationControl pagination={pagination} onPageChange={handlePageChange} isDarkTheme={isDarkTheme}/>
             </>
           ) : (
             <EmptyState />

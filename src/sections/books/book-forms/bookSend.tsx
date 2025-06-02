@@ -10,8 +10,13 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
 import AnimateButton from '../../../components/@extended/AnimateButton';
 import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
 
 export default function SendBook({ onSuccess, onError }: { onSuccess: () => void; onError: (msg: string) => void }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+  const buttonColor: 'primary' | 'secondary' = isDark ? 'secondary' : 'primary';
+
   return (
     <>
       <Formik
@@ -186,7 +191,15 @@ export default function SendBook({ onSuccess, onError }: { onSuccess: () => void
 
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                  <Button
+                    disableElevation
+                    disabled={isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    color={buttonColor}
+                  >
                     ADD BOOK
                   </Button>
                 </AnimateButton>

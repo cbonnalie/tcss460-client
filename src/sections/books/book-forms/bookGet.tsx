@@ -6,6 +6,8 @@ import { Grid, Stack, InputLabel, OutlinedInput, FormHelperText, Button } from '
 import AnimateButton from '../../../components/@extended/AnimateButton';
 import axios from 'utils/axios';
 import { IBook } from 'types/book';
+import { useTheme } from '@mui/material/styles';
+import { ThemeMode } from 'config';
 
 const transformBookData = (bookData: any) => ({
   isbn13: bookData.isbn13,
@@ -247,6 +249,10 @@ export default function GetBook({
     }
   };
 
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
+  const buttonColor: 'primary' | 'secondary' = isDarkMode ? 'secondary' : 'primary';
+
   return (
     <>
       <Formik
@@ -413,7 +419,7 @@ export default function GetBook({
 
               <Grid item xs={5}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} size="medium" type="submit" variant="contained" color="primary">
+                  <Button disableElevation disabled={isSubmitting} size="medium" type="submit" variant="contained" color={buttonColor}>
                     GET BOOKS
                   </Button>
                 </AnimateButton>
