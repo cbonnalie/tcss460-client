@@ -78,7 +78,11 @@ export default function AuthRegister({ providers, csrfToken }: any) {
           password: Yup.string()
             .required('Password is required')
             .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value.trim())
-            .min(8, 'Password should be at least 8 characters long'),
+            .min(8, 'Password should be at least 8 characters long')
+            .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+            .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+            .matches(/[0-9]/, 'Password must contain at least one number')
+            .matches(/[^a-zA-Z0-9]/, 'Password must contain at least one special character'),
           username: Yup.string()
             .max(255)
             .min(3, 'Username must be greater or equal to 3 characters')
