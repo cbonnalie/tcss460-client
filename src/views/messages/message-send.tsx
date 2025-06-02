@@ -14,7 +14,7 @@ import { Alert } from '@mui/material';
 import PrioritySelector from 'components/PrioritySelector';
 import SendMessage from 'sections/messages/message-forms/messageSend';
 import { useTheme } from '@mui/material/styles';
-import { ThemeMode } from 'config';
+// import { ThemeMode } from 'config';
 
 interface IAlert {
   showAlert: boolean;
