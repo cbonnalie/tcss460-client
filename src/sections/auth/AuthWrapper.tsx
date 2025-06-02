@@ -11,17 +11,20 @@ import Logo from 'components/logo';
 
 interface Props {
   children: ReactElement;
+  showLogo?: boolean;
 }
 
 // ==============================|| AUTHENTICATION - WRAPPER ||============================== //
 
-export default function AuthWrapper({ children }: Props) {
+export default function AuthWrapper({ children, showLogo = true }: Props) {
   return (
     <Box sx={{ minHeight: '100vh' }}>
       <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
-        <Grid item xs={12} sx={{ ml: 3, mt: 3 }}>
-          <Logo />
-        </Grid>
+        {showLogo && (
+          <Grid item xs={12} sx={{ ml: 3, mt: 3 }}>
+            <Logo />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <Grid
             item

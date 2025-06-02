@@ -1,15 +1,21 @@
 'use client';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axiosServices from '../../utils/axios'; 
 
-// Simple validation schema
 const validationSchema = Yup.object({
-  currentPassword: Yup.string().required('Required'),
-  newPassword: Yup.string().required('Required'),
+  currentPassword: Yup.string().required('Current password is required'),
+  newPassword: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .matches(/[^a-zA-Z0-9]/, 'Password must contain at least one special character')
+    .required('New password is required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('newPassword')], 'Passwords must match')
-    .required('Required')
+    .required('Confirm password is required')
 });
 
 export default function AuthPasswordChange() {
@@ -20,14 +26,51 @@ export default function AuthPasswordChange() {
       confirmPassword: ''
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log('Submit:', values);
-      // TODO: Connect to API
+    onSubmit: async (values, { setSubmitting, setStatus, resetForm }) => {
+      try {
+        const response = await axiosServices.patch('/change', {
+          oldpassword: values.currentPassword,
+          newpassword: values.newPassword
+        });
+
+        if (response.status === 200) {
+          setStatus({ success: true, message: 'Password changed successfully!' });
+          resetForm();
+        }
+      } catch (error: any) {
+        let message = 'Password change failed. Please try again.';
+        
+        if (error.response) {
+          if (error.response.status === 401) {
+            message = 'Current password is incorrect';
+          } else if (error.response.data?.message) {
+            message = error.response.data.message;
+          }
+        } else if (error.message) {
+          message = error.message;
+        }
+        
+        setStatus({ error: message });
+      } finally {
+        setSubmitting(false);
+      }
     }
   });
 
   return (
     <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 2 }}>
+      {/* Status Messages */}
+      {formik.status?.success && (
+        <Typography color="success.main" sx={{ mb: 2 }}>
+          {formik.status.message}
+        </Typography>
+      )}
+      {formik.status?.error && (
+        <Typography color="error.main" sx={{ mb: 2 }}>
+          {formik.status.error}
+        </Typography>
+      )}
+
       <TextField
         fullWidth
         margin="normal"
@@ -64,8 +107,15 @@ export default function AuthPasswordChange() {
         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
 
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
-        Update Password
+      <Button 
+        type="submit" 
+        fullWidth 
+        variant="contained" 
+        color="primary"
+        sx={{ mt: 3 }}
+        disabled={formik.isSubmitting}
+      >
+        {formik.isSubmitting ? 'Updating...' : 'Update Password'}
       </Button>
     </Box>
   );
