@@ -7,6 +7,33 @@ import { PaletteColorOptions } from '@mui/material/styles';
 
 export default function Default(colors: PalettesProps): PaletteThemeProps {
   const { blue, red, gold, cyan, green, grey } = colors;
+
+  const customPrimary = [
+    '#f4f1fc',  // 0 - lightest
+    '#e4dcf7',  // 1
+    '#d4c7f2',  // 2
+    '#c4b2ed',  // 3 - light
+    '#9b7de0',  // 4
+    '#4b2e83',  // 5 - main (UW Spirit Purple)
+    '#3d2669',  // 6 - dark
+    '#2f1e4f',  // 7
+    '#211635',  // 8 - darker
+    '#130e1b',  // 9 - darkest
+  ];
+
+  const customSecondary = [
+    '#f8f6f2',  // 0 - lightest
+    '#f0ebdf',  // 1
+    '#e8e0cc',  // 2
+    '#e0d5b9',  // 3 - light
+    '#d0c193',  // 4
+    '#b7a57a',  // 5 - main (UW Husky Gold)
+    '#928462',  // 6 - dark
+    '#6e634a',  // 7
+    '#4a4231',  // 8 - darker
+    '#262119',  // 9 - darkest
+  ];
+
   const greyColors: PaletteColorOptions = {
     0: grey[0],
     50: grey[1],
@@ -30,33 +57,33 @@ export default function Default(colors: PalettesProps): PaletteThemeProps {
 
   return {
     primary: {
-      lighter: blue[0],
-      100: blue[1],
-      200: blue[2],
-      light: blue[3],
-      400: blue[4],
-      main: blue[5],
-      dark: blue[6],
-      700: blue[7],
-      darker: blue[8],
-      900: blue[9],
+      lighter: customPrimary[0],
+      100: customPrimary[1],
+      200: customPrimary[2],
+      light: customPrimary[3],
+      400: customPrimary[4],
+      main: customPrimary[5],
+      dark: customPrimary[6],
+      700: customPrimary[7],
+      darker: customPrimary[8],
+      900: customPrimary[9],
       contrastText
     },
     secondary: {
-      lighter: greyColors[100],
-      100: greyColors[100],
-      200: greyColors[200],
-      light: greyColors[300],
-      400: greyColors[400],
-      main: greyColors[500]!,
-      600: greyColors[600],
-      dark: greyColors[700],
-      800: greyColors[800],
-      darker: greyColors[900],
-      A100: greyColors[0],
-      A200: greyColors.A400,
-      A300: greyColors.A700,
-      contrastText: greyColors[0]
+      lighter: customSecondary[0],
+      100: customSecondary[1],
+      200: customSecondary[2],
+      light: customSecondary[3],
+      400: customSecondary[4],
+      main: customSecondary[5],
+      600: customSecondary[6],
+      dark: customSecondary[7],
+      800: customSecondary[8],
+      darker: customSecondary[9],
+      A100: customSecondary[0],
+      A200: customSecondary[6],
+      A300: customSecondary[7],
+      contrastText: '#000'
     },
     error: {
       lighter: red[0],

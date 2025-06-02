@@ -7,14 +7,13 @@ import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Alert } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // Project imports
 import PrioritySelector from 'components/PrioritySelector';
 import SendMessage from 'sections/messages/message-forms/messageSend';
-// import { useTheme } from '@mui/material/styles';
-// import { ThemeMode } from 'config';
+import { ThemeMode } from '../../config';
 
 interface IAlert {
   showAlert: boolean;
@@ -31,7 +30,8 @@ const EMPTY_ALERT: IAlert = {
 export default function MessageSend() {
   const [priority, setPriority] = React.useState(1);
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
-  // const theme = useTheme();
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
 
   const onSuccess = () => {
     setAlert({
@@ -68,7 +68,9 @@ export default function MessageSend() {
             alignItems: 'center'
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{
+            m: 1,
+            bgcolor: isDarkMode ? 'secondary.main' : 'primary.main' }}>
             <SendIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -77,7 +79,7 @@ export default function MessageSend() {
 
           <Box sx={{ mt: 1 }}>
             <PrioritySelector initialValue={priority} onClick={handlePriorityClick} />
-            <SendMessage priority={priority} onSuccess={onSuccess} onError={onError} />
+            <SendMessage priority={priority} onSuccess={onSuccess} onError={onError}/>
           </Box>
         </Box>
       </Container>

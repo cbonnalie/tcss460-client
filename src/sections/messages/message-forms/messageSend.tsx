@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
 
 // third party
 import * as Yup from 'yup';
@@ -24,12 +25,16 @@ import axios from 'utils/axios';
 export default function SendMessage({
   priority,
   onSuccess,
-  onError
+  onError,
 }: {
   priority: number;
   onSuccess: () => void;
   onError: (msg: string) => void;
 }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+  const buttonColor: 'primary' | 'secondary' = isDark ? 'secondary' : 'primary';
+
   return (
     <>
       <Formik
@@ -117,7 +122,15 @@ export default function SendMessage({
               )}
               <Grid item xs={12}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
+                  <Button
+                    disableElevation
+                    disabled={isSubmitting}
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    color={buttonColor}
+                  >
                     SEND!
                   </Button>
                 </AnimateButton>
