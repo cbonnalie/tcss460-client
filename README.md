@@ -26,3 +26,16 @@
 - Noah
     - Updated the register/login form to match the 3rd-party Auth API registration/login requirements and tested.
     - Adjustments to authOptions.tsx to work with the 3rd-party Web API. 
+
+## Beta Sprint II
+
+### Contribution
+
+- Christian
+    - 
+- Kaleb
+    - Remade book search page and hooked up the web API to it.
+- Mark
+    - 
+- Noah
+    - 
