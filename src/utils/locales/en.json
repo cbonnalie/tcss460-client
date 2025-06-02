@@ -17,5 +17,7 @@
   "books": "Books",
   "add-book": "Create Book",
   "view-books": "View Books",
-  "single-book": "Get Book"
+  "book-search": "Book Search",
+  "minRating": "Minimum Rating",
+  "ratingCount": "Ratings"
 }

@@ -100,6 +100,9 @@ export default function BookViewPage() {
             <strong>Original Title:</strong> {book.original_title}
           </Typography>
           <Typography>
+            <strong>ISBN</strong> {book.isbn13}
+          </Typography>
+          <Typography>
             <strong>Publication Year:</strong> {book.publication}
           </Typography>
           <RatingSummary book={book} />
