@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import BookIcon from '@mui/icons-material/AutoStoriesOutlined';
 import GetBook from '../../sections/books/book-forms/bookGet';
 import Avatar from '@mui/material/Avatar';
+import FilteredBookList from './filtered-book-list';
+import { IBook } from 'types/book';
 
 const defaultTheme = createTheme();
 
@@ -29,20 +31,26 @@ const EMPTY_ALERT: IAlert = {
 export default function BookGet() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
 
+  const [filteredBooks, setFilteredBooks] = React.useState<IBook[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [loadError, setLoadError] = React.useState<string | null>(null);
+
   const onSuccess = () => {
     setAlert({
       showAlert: true,
-      alertMessage: 'Book Retrived!',
+      alertMessage: 'Book Retrieved!',
       alertSeverity: 'success'
     });
+    setLoadError(null);
   };
 
   const onError = (message: string) => {
     setAlert({
       showAlert: true,
-      alertMessage: 'Book NOT Found! Error:' + message,
+      alertMessage: 'Book NOT Found! Error: ' + message,
       alertSeverity: 'error'
     });
+    setLoadError(message);
   };
 
   return (
@@ -52,24 +60,22 @@ export default function BookGet() {
           {alert.alertMessage}
         </Alert>
       )}
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xl">
         <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <BookIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Get Book
+            Book Search
           </Typography>
 
           <Box sx={{ mt: 1 }}>
-            <GetBook onSuccess={onSuccess} onError={onError} />
+            <GetBook onSuccess={onSuccess} onError={onError} setBooks={setFilteredBooks} setIsLoading={setIsLoading} />
+          </Box>
+
+          <Box sx={{ mt: 1 }}>
+            <FilteredBookList books={filteredBooks} loading={isLoading} error={loadError} />
           </Box>
         </Box>
       </Container>

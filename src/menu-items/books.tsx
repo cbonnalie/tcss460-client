@@ -34,8 +34,8 @@ const books: NavItemType = {
       icon: icons.AddIcon
     },
     {
-      id: 'single-book',
-      title: <FormattedMessage id="single-book" />,
+      id: 'book-search',
+      title: <FormattedMessage id="book-search" />,
       type: 'item',
       url: '/books/book',
       icon: icons.ImportContactsIcon
