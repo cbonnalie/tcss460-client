@@ -38,4 +38,4 @@
 - Mark
     - Worked on and cleaned change password form, tested and added functionallity.
 - Noah
-    - 
+    - Created and designed page UI for book delete. 
