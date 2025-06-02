@@ -36,6 +36,6 @@
 - Kaleb
     - Remade book search page and hooked up the web API to it.
 - Mark
-    - 
+    - Worked on and cleaned change password form, tested and added functionallity.
 - Noah
     - 
