@@ -32,7 +32,7 @@
 ### Contribution
 
 - Christian
-    - 
+    - Made page to create a book and started implementing dark mode.
 - Kaleb
     - Remade book search page and hooked up the web API to it.
 - Mark
