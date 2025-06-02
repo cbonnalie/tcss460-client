@@ -31,7 +31,7 @@ const EMPTY_ALERT: IAlert = {
 export default function MessageSend() {
   const [priority, setPriority] = React.useState(1);
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const onSuccess = () => {
     setAlert({
