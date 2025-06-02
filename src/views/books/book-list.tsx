@@ -14,7 +14,7 @@ import { BookListItem } from '../../components/BookListItem';
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@mui/material/styles';
 import { ThemeMode } from 'config';
-import { boolean } from 'yup';
+// import { boolean } from 'yup';
 
 // loading UI
 const LoadingState = () => (
