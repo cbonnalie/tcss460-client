@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 // next
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -331,12 +331,12 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
                     alignItems: 'center',
                     justifyContent: 'center',
                     '&:hover': {
-                      bgcolor: mode === ThemeMode.DARK ? 'secondary.light' : 'secondary.lighter'
+                      bgcolor: mode === ThemeMode.DARK ? 'primary.darker' : 'primary.lighter',
                     }
                   }),
                   ...(!drawerOpen &&
                     selected === menu.id && {
-                      bgcolor: mode === ThemeMode.DARK ? 'primary.900' : 'primary.lighter',
+                      bgcolor: mode === ThemeMode.DARK ? 'primary.darker' : 'primary.lighter',
                       '&:hover': {
                         bgcolor: mode === ThemeMode.DARK ? 'primary.darker' : 'primary.lighter'
                       }
@@ -370,13 +370,13 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
                     event?.stopPropagation();
                     handleClick(event, false);
                   }}
-                  color="secondary"
+                  color="primary"
                   variant="outlined"
                   sx={{
                     width: 20,
                     height: 20,
                     mr: '-5px',
-                    color: 'secondary.dark',
+                    color: 'primary.dark',
                     borderColor: open ? 'primary.light' : 'secondary.light',
                     '&:hover': { borderColor: open ? 'primary.main' : 'secondary.main' }
                   }}

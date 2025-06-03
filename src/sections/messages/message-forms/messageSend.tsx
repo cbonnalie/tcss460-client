@@ -126,8 +126,9 @@ export default function SendMessage({
                     type="submit"
                     variant="contained"
                     color="primary"
+                    sx={{color: 'primary.contrastText'}}
                   >
-                    SEND!
+                    Send Message
                   </Button>
                 </AnimateButton>
               </Grid>

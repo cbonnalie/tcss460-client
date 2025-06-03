@@ -58,7 +58,7 @@ export default function Default(colors: PalettesProps, mode: 'light' | 'dark' = 
     A800: grey[16]
   };
 
-  const contrastText = '#fff';
+  const contrastText = isLightMode ? '#fff' : '#000';
   const secondaryContrastText = isLightMode ? '#000' : '#fff';
 
   return {

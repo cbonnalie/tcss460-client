@@ -7,7 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { IconButton, LinearProgress, Stack, TextField } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
@@ -62,53 +62,49 @@ export default function BookViewPage() {
 
   if (!book) {
     return (
-      <ThemeProvider theme={defaultTheme}>
-        <Container component="main" maxWidth="sm">
-          <CssBaseline />
-          <Typography variant="h6" sx={{ mt: 10, textAlign: 'center' }}>
-            Book not found
-          </Typography>
-        </Container>
-      </ThemeProvider>
+      <Container component="main" maxWidth="sm">
+        <CssBaseline />
+        <Typography variant="h6" sx={{ mt: 10, textAlign: 'center' }}>
+          Book not found
+        </Typography>
+      </Container>
     );
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="md">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <ImportContactsIcon />
-          </Avatar>
-          <Box sx={{ mt: 2 }}>
-            <img src={book.large} alt={book.title} style={{ maxWidth: '100%', height: 'auto' }} />
-          </Box>
-          <Typography component="h1" variant="h5">
-            {book.title}
-          </Typography>
-          <Typography sx={{ mt: 1 }}>
-            <strong>Author:</strong> {book.authors.join(', ')}
-          </Typography>
-          <Typography>
-            <strong>Original Title:</strong> {book.original_title}
-          </Typography>
-          <Typography>
-            <strong>ISBN</strong> {book.isbn13}
-          </Typography>
-          <Typography>
-            <strong>Publication Year:</strong> {book.publication}
-          </Typography>
-          <RatingSummary book={book} />
+    <Container component="main" maxWidth="md">
+      <CssBaseline />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+          <ImportContactsIcon />
+        </Avatar>
+        <Box sx={{ mt: 2 }}>
+          <img src={book.large} alt={book.title} style={{ maxWidth: '100%', height: 'auto' }} />
         </Box>
-      </Container>
-    </ThemeProvider>
+        <Typography component="h1" variant="h5">
+          {book.title}
+        </Typography>
+        <Typography sx={{ mt: 1 }}>
+          <strong>Author:</strong> {book.authors.join(', ')}
+        </Typography>
+        <Typography>
+          <strong>Original Title:</strong> {book.original_title}
+        </Typography>
+        <Typography>
+          <strong>ISBN</strong> {book.isbn13}
+        </Typography>
+        <Typography>
+          <strong>Publication Year:</strong> {book.publication}
+        </Typography>
+        <RatingSummary book={book} />
+      </Box>
+    </Container>
   );
 }
 
@@ -152,7 +148,8 @@ function RatingSummary({ book }: { book: IBook }) {
     return (
       <>
         {[...Array(5)].map((_, i) =>
-          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> : <StarBorderIcon key={i} color="disabled" fontSize="small" />
+          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> :
+            <StarBorderIcon key={i} color="disabled" fontSize="small" />
         )}
       </>
     );

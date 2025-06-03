@@ -276,7 +276,7 @@ export default function GetBook({
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit}>
-            <Grid container spacing={1} alignItems="center" wrap="nowrap">
+            <Grid container spacing={1} alignItems="flex-end" wrap="nowrap">
               <Grid item xs={8}>
                 <Stack>
                   <InputLabel htmlFor="isbn13">ISBN</InputLabel>
@@ -413,8 +413,8 @@ export default function GetBook({
 
               <Grid item xs={5}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} size="medium" type="submit" variant="contained" color="primary">
-                    GET BOOKS
+                  <Button disableElevation disabled={isSubmitting} size="medium" type="submit" variant="contained" color="primary" sx={{color: 'primary.contrastText'}}>
+                    Get Books
                   </Button>
                 </AnimateButton>
               </Grid>

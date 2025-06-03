@@ -131,7 +131,7 @@ export default function NavItem({ item, level, isParents = false }: Props) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     '&:hover': {
-                      bgcolor: mode === ThemeMode.DARK ? 'secondary.light' : 'secondary.lighter'
+                      bgcolor: mode === ThemeMode.DARK ? 'primary.darker' : 'primary.lighter'
                     }
                   }),
                   ...(!drawerOpen &&

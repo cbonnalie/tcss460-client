@@ -20,8 +20,8 @@ export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => vo
 
       <Grid item xs={12}>
         <AnimateButton>
-          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color="primary">
-            DELETE BOOK
+          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color="primary" sx={{color: 'primary.contrastText'}}>
+            Delete Book
           </Button>
         </AnimateButton>
       </Grid>
@@ -44,8 +44,8 @@ export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => vo
 
       <Grid item xs={12}>
         <AnimateButton>
-          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color="primary">
-            DELETE BOOK
+          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color="primary" sx={{color: 'primary.contrastText'}}>
+            Delete Books
           </Button>
         </AnimateButton>
       </Grid>

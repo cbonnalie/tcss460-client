@@ -11,13 +11,15 @@ import { ExtendedStyleProps } from 'types/extended';
 
 function getColorStyle({ color, theme }: ExtendedStyleProps) {
   const colors = getColors(theme, color);
-  const { lighter, light, main } = colors;
+  const { lighter, light, main, dark } = colors;
+  const isLightMode = theme.palette.mode === 'light';
 
   return {
-    borderColor: alpha(light, 0.5),
-    backgroundColor: lighter,
+    borderColor: alpha(isLightMode ? dark : light, 0.5),
+    backgroundColor: isLightMode ? light : lighter,
+    color: isLightMode ? theme.palette.common.black : theme.palette.common.white,
     '& .MuiAlert-icon': {
-      color: main
+      color: isLightMode ? theme.palette.common.black : theme.palette.common.white,
     }
   };
 }
@@ -32,14 +34,21 @@ export default function Alert(theme: Theme) {
       styleOverrides: {
         root: {
           color: theme.palette.text.primary,
-          fontSize: '0.875rem'
+          fontSize: '0.875rem',
+          marginBottom: theme.spacing(2)
         },
+
+        standardSuccess: getColorStyle({ color: 'success', theme }),
+        standardError: getColorStyle({ color: 'error', theme }),
+        standardWarning: getColorStyle({ color: 'warning', theme }),
+        standardInfo: getColorStyle({ color: 'info', theme }),
+
         icon: {
           fontSize: '1rem'
         },
         message: {
           padding: 0,
-          marginTop: 3
+          marginTop: 3,
         },
         filled: {
           color: theme.palette.grey[0]

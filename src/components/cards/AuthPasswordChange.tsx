@@ -116,7 +116,7 @@ export default function AuthPasswordChange({
         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
 
-      <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3 }}
+      <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, color: 'primary.contrastText' }}
               disabled={formik.isSubmitting}>
         {formik.isSubmitting ? 'Updating...' : 'Update Password'}
       </Button>
