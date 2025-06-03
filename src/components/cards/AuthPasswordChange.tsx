@@ -18,13 +18,7 @@ const validationSchema = Yup.object({
     .required('Confirm password is required')
 });
 
-export default function AuthPasswordChange({
-    onSuccess,
-    onError
-  }: {
-    onSuccess: () => void;
-    onError: (message: string) => void;
-  }) {
+export default function AuthPasswordChange({ onSuccess, onError }: { onSuccess: () => void; onError: (message: string) => void }) {
   const formik = useFormik({
     initialValues: {
       currentPassword: '',
@@ -64,7 +58,6 @@ export default function AuthPasswordChange({
       }
     }
   });
-
 
   return (
     <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 2 }}>
@@ -116,8 +109,14 @@ export default function AuthPasswordChange({
         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
 
-      <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, color: 'primary.contrastText' }}
-              disabled={formik.isSubmitting}>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        sx={{ mt: 3, color: 'primary.contrastText' }}
+        disabled={formik.isSubmitting}
+      >
         {formik.isSubmitting ? 'Updating...' : 'Update Password'}
       </Button>
     </Box>

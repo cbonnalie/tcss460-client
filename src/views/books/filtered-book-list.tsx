@@ -56,9 +56,15 @@ const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, theme }) => (
     {books.map((book, index) => (
       <React.Fragment key={`book-${book.isbn13}`}>
         <BookListItem book={book} onClick={() => onBookClick(book)} />
-        {index < books.length - 1 && <Divider variant="middle" component="li" sx={{
-          borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800'
-        }} />}
+        {index < books.length - 1 && (
+          <Divider
+            variant="middle"
+            component="li"
+            sx={{
+              borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800'
+            }}
+          />
+        )}
       </React.Fragment>
     ))}
   </List>
@@ -148,7 +154,7 @@ export default function FilteredBookList({ books, loading, error }: FilteredBook
         <Box sx={{ mt: 1, width: '100%' }}>
           {paginatedBooks.length > 0 ? (
             <>
-              <BooksList books={paginatedBooks} onBookClick={handleBookClick} theme={theme}/>
+              <BooksList books={paginatedBooks} onBookClick={handleBookClick} theme={theme} />
               <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
             </>
           ) : (

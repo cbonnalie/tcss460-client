@@ -194,7 +194,7 @@ export default function SendBook({ onSuccess, onError }: { onSuccess: () => void
                     type="submit"
                     variant="contained"
                     color="primary"
-                    sx={{color: 'primary.contrastText'}}
+                    sx={{ color: 'primary.contrastText' }}
                   >
                     Add Book
                   </Button>

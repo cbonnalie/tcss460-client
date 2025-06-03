@@ -6,32 +6,32 @@ import { PaletteColorOptions } from '@mui/material/styles';
 // ==============================|| PRESET THEME - DEFAULT ||============================== //
 
 export default function Default(colors: PalettesProps, mode: 'light' | 'dark' = 'light'): PaletteThemeProps {
-  const { blue, red, gold, cyan, green, grey } = colors;
+  const { red, gold, cyan, green, grey } = colors;
 
   const customPurple = [
-    '#f4f1fc',  // 0 - lightest
-    '#e4dcf7',  // 1
-    '#d4c7f2',  // 2
-    '#c4b2ed',  // 3 - light
-    '#9b7de0',  // 4
-    '#4b2e83',  // 5 - main (UW Spirit Purple)
-    '#3d2669',  // 6 - dark
-    '#2f1e4f',  // 7
-    '#211635',  // 8 - darker
-    '#130e1b',  // 9 - darkest
+    '#f4f1fc', // 0 - lightest
+    '#e4dcf7', // 1
+    '#d4c7f2', // 2
+    '#c4b2ed', // 3 - light
+    '#9b7de0', // 4
+    '#4b2e83', // 5 - main (UW Spirit Purple)
+    '#3d2669', // 6 - dark
+    '#2f1e4f', // 7
+    '#211635', // 8 - darker
+    '#130e1b' // 9 - darkest
   ];
 
   const customGold = [
-    '#f8f6f2',  // 0 - lightest
-    '#f0ebdf',  // 1
-    '#e8e0cc',  // 2
-    '#e0d5b9',  // 3 - light
-    '#d0c193',  // 4
-    '#b7a57a',  // 5 - main (UW Husky Gold)
-    '#928462',  // 6 - dark
-    '#6e634a',  // 7
-    '#4a4231',  // 8 - darker
-    '#262119',  // 9 - darkest
+    '#f8f6f2', // 0 - lightest
+    '#f0ebdf', // 1
+    '#e8e0cc', // 2
+    '#e0d5b9', // 3 - light
+    '#d0c193', // 4
+    '#b7a57a', // 5 - main (UW Husky Gold)
+    '#928462', // 6 - dark
+    '#6e634a', // 7
+    '#4a4231', // 8 - darker
+    '#262119' // 9 - darkest
   ];
 
   const isLightMode = mode === 'light';
@@ -89,7 +89,7 @@ export default function Default(colors: PalettesProps, mode: 'light' | 'dark' = 
       A100: secondaryColors[0],
       A200: secondaryColors[6],
       A300: secondaryColors[7],
-      contrastText: secondaryContrastText,
+      contrastText: secondaryContrastText
     },
     error: {
       lighter: red[0],

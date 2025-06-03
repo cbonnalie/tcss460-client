@@ -12,7 +12,6 @@ import Avatar from '@mui/material/Avatar';
 import { useTheme } from '@mui/material/styles';
 
 import SendBook from '../../sections/books/book-forms/bookSend';
-import { ThemeMode } from 'config';
 
 interface IAlert {
   showAlert: boolean;
@@ -28,8 +27,7 @@ const EMPTY_ALERT: IAlert = {
 
 export default function BooksAdd() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
+  useTheme();
 
   const onSuccess = () => {
     setAlert({
@@ -61,7 +59,7 @@ export default function BooksAdd() {
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>

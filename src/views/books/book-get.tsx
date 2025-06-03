@@ -63,7 +63,7 @@ export default function BookGet() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>

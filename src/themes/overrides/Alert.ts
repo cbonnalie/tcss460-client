@@ -11,7 +11,7 @@ import { ExtendedStyleProps } from 'types/extended';
 
 function getColorStyle({ color, theme }: ExtendedStyleProps) {
   const colors = getColors(theme, color);
-  const { lighter, light, main, dark } = colors;
+  const { lighter, light, dark } = colors;
   const isLightMode = theme.palette.mode === 'light';
 
   return {
@@ -19,7 +19,7 @@ function getColorStyle({ color, theme }: ExtendedStyleProps) {
     backgroundColor: isLightMode ? light : lighter,
     color: isLightMode ? theme.palette.common.black : theme.palette.common.white,
     '& .MuiAlert-icon': {
-      color: isLightMode ? theme.palette.common.black : theme.palette.common.white,
+      color: isLightMode ? theme.palette.common.black : theme.palette.common.white
     }
   };
 }
@@ -48,7 +48,7 @@ export default function Alert(theme: Theme) {
         },
         message: {
           padding: 0,
-          marginTop: 3,
+          marginTop: 3
         },
         filled: {
           color: theme.palette.grey[0]

@@ -13,7 +13,6 @@ import DeleteBook from '../../sections/books/book-forms/bookDelete';
 import Typography from '@mui/material/Typography';
 
 import { useTheme } from '@mui/material/styles';
-import { ThemeMode } from 'config';
 
 interface IAlert {
   showAlert: boolean;
@@ -29,8 +28,7 @@ const EMPTY_ALERT: IAlert = {
 
 export default function BooksDelete() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
+  useTheme();
   const onSuccess = () => {
     setAlert({
       showAlert: true,
@@ -63,10 +61,12 @@ export default function BooksDelete() {
             alignItems: 'center'
           }}
         >
-          <Avatar sx={{
-            m: 1,
-            bgcolor: 'primary.main'
-          }}>
+          <Avatar
+            sx={{
+              m: 1,
+              bgcolor: 'primary.main'
+            }}
+          >
             <TrashIcon />
           </Avatar>
           <Typography component="h1" variant="h3">

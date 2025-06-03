@@ -17,9 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import { IBook } from 'types/book';
 import axios from 'utils/axios';
-
-const defaultTheme = createTheme();
-
+createTheme();
 const transformBookData = (bookData: any) => ({
   isbn13: bookData.isbn13,
   authors: bookData.authors.split(', '),
@@ -148,8 +146,7 @@ function RatingSummary({ book }: { book: IBook }) {
     return (
       <>
         {[...Array(5)].map((_, i) =>
-          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> :
-            <StarBorderIcon key={i} color="disabled" fontSize="small" />
+          i < rounded ? <StarIcon key={i} color="primary" fontSize="small" /> : <StarBorderIcon key={i} color="disabled" fontSize="small" />
         )}
       </>
     );

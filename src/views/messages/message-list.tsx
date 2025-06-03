@@ -17,7 +17,6 @@ import PrioritySelector from 'components/PrioritySelector';
 import { MessageListItem, NoMessage } from 'components/MessageListItem';
 import { ThemeMode } from '../../config';
 
-
 export default function MessagesList() {
   const [messages, setMessages] = React.useState<IMessage[]>([]);
   const [priority, setPriority] = React.useState(0);
@@ -72,10 +71,12 @@ export default function MessagesList() {
             alignItems: 'center'
           }}
         >
-          <Avatar sx={{
-            m: 1,
-            bgcolor: 'primary.main'
-          }}>
+          <Avatar
+            sx={{
+              m: 1,
+              bgcolor: 'primary.main'
+            }}
+          >
             <EmailIcon />
           </Avatar>
           <Typography component="h1" variant="h3">

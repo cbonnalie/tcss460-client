@@ -413,7 +413,15 @@ export default function GetBook({
 
               <Grid item xs={5}>
                 <AnimateButton>
-                  <Button disableElevation disabled={isSubmitting} size="medium" type="submit" variant="contained" color="primary" sx={{color: 'primary.contrastText'}}>
+                  <Button
+                    disableElevation
+                    disabled={isSubmitting}
+                    size="medium"
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{ color: 'primary.contrastText' }}
+                  >
                     Get Books
                   </Button>
                 </AnimateButton>

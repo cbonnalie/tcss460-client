@@ -24,13 +24,12 @@ import axios from 'utils/axios';
 export default function SendMessage({
   priority,
   onSuccess,
-  onError,
+  onError
 }: {
   priority: number;
   onSuccess: () => void;
   onError: (msg: string) => void;
 }) {
-
   return (
     <>
       <Formik
@@ -126,7 +125,7 @@ export default function SendMessage({
                     type="submit"
                     variant="contained"
                     color="primary"
-                    sx={{color: 'primary.contrastText'}}
+                    sx={{ color: 'primary.contrastText' }}
                   >
                     Send Message
                   </Button>

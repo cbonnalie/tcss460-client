@@ -331,7 +331,7 @@ export default function NavCollapse({ menu, level, parentId, setSelectedItems, s
                     alignItems: 'center',
                     justifyContent: 'center',
                     '&:hover': {
-                      bgcolor: mode === ThemeMode.DARK ? 'primary.darker' : 'primary.lighter',
+                      bgcolor: mode === ThemeMode.DARK ? 'primary.darker' : 'primary.lighter'
                     }
                   }),
                   ...(!drawerOpen &&

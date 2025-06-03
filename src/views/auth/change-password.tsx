@@ -1,7 +1,5 @@
 'use client';
 
-// material-ui
-import Grid from '@mui/material/Grid';
 // import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LockIcon from '@mui/icons-material/Lock'; // Optional but nice
@@ -10,10 +8,9 @@ import AuthPasswordChange from 'components/cards/AuthPasswordChange';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import {Alert} from '@mui/material';
+import { Alert } from '@mui/material';
 
 import { useTheme } from '@mui/material/styles';
-import { ThemeMode } from 'config';
 import React from 'react';
 
 // ================================|| CHANGE PASSWORD ||================================ //
@@ -32,8 +29,7 @@ const EMPTY_ALERT: IAlert = {
 
 export default function ChangePassword() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
+  useTheme();
 
   const onSuccess = () => {
     setAlert({
@@ -41,7 +37,7 @@ export default function ChangePassword() {
       alertMessage: 'Password changed successfully!',
       alertSeverity: 'success'
     });
-  }
+  };
 
   const onError = (message: string) => {
     setAlert({
@@ -65,7 +61,7 @@ export default function ChangePassword() {
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <LockIcon sx={{ fontSize: 48, color: 'primary.main' }} />
@@ -75,7 +71,7 @@ export default function ChangePassword() {
           <Typography color="text.secondary">Update your account password</Typography>
         </Box>
 
-        <Box sx={{ mt: 1}}>
+        <Box sx={{ mt: 1 }}>
           <AuthPasswordChange onSuccess={onSuccess} onError={onError} />
         </Box>
       </Container>
