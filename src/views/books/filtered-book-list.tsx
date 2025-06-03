@@ -49,10 +49,10 @@ const EmptyState = () => (
 interface BooksListProps {
   books: IBook[];
   onBookClick: (book: IBook) => void;
-  theme: ReturnType<typeof useTheme>;
+  isDarkTheme: boolean;
 }
 
-const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, theme }) => (
+const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, isDarkTheme }) => (
   <List>
     {books.map((book, index) => (
       <React.Fragment key={`book-${book.isbn13}`}>
@@ -62,7 +62,7 @@ const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, theme }) => (
             variant="middle"
             component="li"
             sx={{
-              borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800'
+              borderColor: isDarkTheme ? '#ffffff' : 'grey.A800'
             }}
           />
         )}
@@ -112,7 +112,9 @@ interface FilteredBookListProps {
 
 export default function FilteredBookList({ books, loading, error }: FilteredBookListProps) {
   const router = useRouter();
+
   const theme = useTheme();
+  const isDarkTheme = theme.palette.mode === ThemeMode.DARK;
 
   const [page, setPage] = useState(1);
   const limit = 20;
@@ -155,7 +157,7 @@ export default function FilteredBookList({ books, loading, error }: FilteredBook
         <Box sx={{ mt: 1, width: '100%' }}>
           {paginatedBooks.length > 0 ? (
             <>
-              <BooksList books={paginatedBooks} onBookClick={handleBookClick} theme={theme} />
+              <BooksList books={paginatedBooks} onBookClick={handleBookClick} isDarkTheme={isDarkTheme} />
               <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
             </>
           ) : (
