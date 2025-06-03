@@ -5,10 +5,10 @@ import { PaletteColorOptions } from '@mui/material/styles';
 
 // ==============================|| PRESET THEME - DEFAULT ||============================== //
 
-export default function Default(colors: PalettesProps): PaletteThemeProps {
+export default function Default(colors: PalettesProps, mode: 'light' | 'dark' = 'light'): PaletteThemeProps {
   const { blue, red, gold, cyan, green, grey } = colors;
 
-  const customPrimary = [
+  const customPurple = [
     '#f4f1fc',  // 0 - lightest
     '#e4dcf7',  // 1
     '#d4c7f2',  // 2
@@ -21,7 +21,7 @@ export default function Default(colors: PalettesProps): PaletteThemeProps {
     '#130e1b',  // 9 - darkest
   ];
 
-  const customSecondary = [
+  const customGold = [
     '#f8f6f2',  // 0 - lightest
     '#f0ebdf',  // 1
     '#e8e0cc',  // 2
@@ -33,6 +33,10 @@ export default function Default(colors: PalettesProps): PaletteThemeProps {
     '#4a4231',  // 8 - darker
     '#262119',  // 9 - darkest
   ];
+
+  const isLightMode = mode === 'light';
+  const primaryColors = isLightMode ? customPurple : customGold;
+  const secondaryColors = isLightMode ? customGold : customPurple;
 
   const greyColors: PaletteColorOptions = {
     0: grey[0],
@@ -53,37 +57,39 @@ export default function Default(colors: PalettesProps): PaletteThemeProps {
     A700: grey[14],
     A800: grey[16]
   };
+
   const contrastText = '#fff';
+  const secondaryContrastText = isLightMode ? '#000' : '#fff';
 
   return {
     primary: {
-      lighter: customPrimary[0],
-      100: customPrimary[1],
-      200: customPrimary[2],
-      light: customPrimary[3],
-      400: customPrimary[4],
-      main: customPrimary[5],
-      dark: customPrimary[6],
-      700: customPrimary[7],
-      darker: customPrimary[8],
-      900: customPrimary[9],
+      lighter: primaryColors[0],
+      100: primaryColors[1],
+      200: primaryColors[2],
+      light: primaryColors[3],
+      400: primaryColors[4],
+      main: primaryColors[5],
+      dark: primaryColors[6],
+      700: primaryColors[7],
+      darker: primaryColors[8],
+      900: primaryColors[9],
       contrastText
     },
     secondary: {
-      lighter: customSecondary[0],
-      100: customSecondary[1],
-      200: customSecondary[2],
-      light: customSecondary[3],
-      400: customSecondary[4],
-      main: customSecondary[5],
-      600: customSecondary[6],
-      dark: customSecondary[7],
-      800: customSecondary[8],
-      darker: customSecondary[9],
-      A100: customSecondary[0],
-      A200: customSecondary[6],
-      A300: customSecondary[7],
-      contrastText: '#000'
+      lighter: secondaryColors[0],
+      100: secondaryColors[1],
+      200: secondaryColors[2],
+      light: secondaryColors[3],
+      400: secondaryColors[4],
+      main: secondaryColors[5],
+      600: secondaryColors[6],
+      dark: secondaryColors[7],
+      800: secondaryColors[8],
+      darker: secondaryColors[9],
+      A100: secondaryColors[0],
+      A200: secondaryColors[6],
+      A300: secondaryColors[7],
+      contrastText: secondaryContrastText,
     },
     error: {
       lighter: red[0],

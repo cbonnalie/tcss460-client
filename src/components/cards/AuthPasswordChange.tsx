@@ -1,8 +1,11 @@
 'use client';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axiosServices from '../../utils/axios';
+
+import { useTheme } from '@mui/material/styles';
+import { ThemeMode } from 'config';
 
 const validationSchema = Yup.object({
   currentPassword: Yup.string().required('Current password is required'),
@@ -18,7 +21,13 @@ const validationSchema = Yup.object({
     .required('Confirm password is required')
 });
 
-export default function AuthPasswordChange() {
+export default function AuthPasswordChange({
+    onSuccess,
+    onError
+  }: {
+    onSuccess: () => void;
+    onError: (message: string) => void;
+  }) {
   const formik = useFormik({
     initialValues: {
       currentPassword: '',
@@ -34,10 +43,12 @@ export default function AuthPasswordChange() {
         });
 
         if (response.status === 200) {
+          onSuccess();
           setStatus({ success: true, message: 'Password changed successfully!' });
           resetForm();
         }
       } catch (error: any) {
+        onError(error);
         let message = 'Password change failed. Please try again.';
 
         if (error.response) {
@@ -56,6 +67,10 @@ export default function AuthPasswordChange() {
       }
     }
   });
+
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
+  const buttonColor = (isDarkMode ? 'secondary' : 'primary') as 'primary' | 'secondary';
 
   return (
     <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 2 }}>
@@ -107,7 +122,8 @@ export default function AuthPasswordChange() {
         helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
 
-      <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3 }} disabled={formik.isSubmitting}>
+      <Button type="submit" fullWidth variant="contained" color={buttonColor} sx={{ mt: 3 }}
+              disabled={formik.isSubmitting}>
         {formik.isSubmitting ? 'Updating...' : 'Update Password'}
       </Button>
     </Box>

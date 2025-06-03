@@ -57,6 +57,7 @@ export default function BooksDelete() {
         <CssBaseline />
         <Box
           sx={{
+            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -68,7 +69,7 @@ export default function BooksDelete() {
           }}>
             <TrashIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h3">
             Delete Book
           </Typography>
           <Box sx={{ mt: 1 }}>

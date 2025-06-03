@@ -79,7 +79,7 @@ export default function MessagesList() {
           }}>
             <EmailIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h3">
             Read Messages
           </Typography>
           <Box sx={{ mt: 1 }}>
