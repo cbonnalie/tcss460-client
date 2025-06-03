@@ -22,7 +22,6 @@ export default function MessagesList() {
   const [messages, setMessages] = React.useState<IMessage[]>([]);
   const [priority, setPriority] = React.useState(0);
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
 
   React.useEffect(() => {
     axios
@@ -75,7 +74,7 @@ export default function MessagesList() {
         >
           <Avatar sx={{
             m: 1,
-            bgcolor: isDarkMode ? 'secondary.main' : 'primary.main'
+            bgcolor: 'primary.main'
           }}>
             <EmailIcon />
           </Avatar>

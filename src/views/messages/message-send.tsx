@@ -70,7 +70,7 @@ export default function MessageSend() {
         >
           <Avatar sx={{
             m: 1,
-            bgcolor: isDarkMode ? 'secondary.main' : 'primary.main' }}>
+            bgcolor: 'primary.main' }}>
             <SendIcon />
           </Avatar>
           <Typography component="h1" variant="h3">

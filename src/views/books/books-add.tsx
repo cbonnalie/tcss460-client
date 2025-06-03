@@ -64,7 +64,7 @@ export default function BooksAdd() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: isDarkMode ? 'secondary.main' : 'primary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <BookIcon />
           </Avatar>
           <Typography component="h1" variant="h3">

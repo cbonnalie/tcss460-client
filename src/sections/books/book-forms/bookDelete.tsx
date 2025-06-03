@@ -8,14 +8,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
 import AnimateButton from 'components/@extended/AnimateButton';
 
-import { useTheme } from '@mui/material/styles';
-import { ThemeMode } from 'config';
-
 export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => void; onError: (msg: string) => void }) {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === ThemeMode.DARK;
-  const buttonColor: 'primary' | 'secondary' = isDark ? 'secondary' : 'primary';
-
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
@@ -27,7 +20,7 @@ export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => vo
 
       <Grid item xs={12}>
         <AnimateButton>
-          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color={buttonColor}>
+          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color="primary">
             DELETE BOOK
           </Button>
         </AnimateButton>
@@ -51,7 +44,7 @@ export default function DeleteBook({ onSuccess, onError }: { onSuccess: () => vo
 
       <Grid item xs={12}>
         <AnimateButton>
-          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color={buttonColor}>
+          <Button disableElevation disabled={false} fullWidth size="large" type="submit" variant="contained" color="primary">
             DELETE BOOK
           </Button>
         </AnimateButton>

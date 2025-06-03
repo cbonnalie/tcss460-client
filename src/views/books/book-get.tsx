@@ -13,9 +13,6 @@ import Avatar from '@mui/material/Avatar';
 import FilteredBookList from './filtered-book-list';
 import { IBook } from 'types/book';
 
-import { useTheme } from '@mui/material/styles';
-import { ThemeMode } from 'config';
-
 interface IAlert {
   showAlert: boolean;
   alertMessage: string;
@@ -30,8 +27,6 @@ const EMPTY_ALERT: IAlert = {
 
 export default function BookGet() {
   const [alert, setAlert] = React.useState(EMPTY_ALERT);
-  const theme = useTheme();
-  const isDarkMode = theme.palette.mode === ThemeMode.DARK;
 
   const [filteredBooks, setFilteredBooks] = React.useState<IBook[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -71,7 +66,7 @@ export default function BookGet() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: isDarkMode ? 'secondary.main' : 'primary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <BookIcon />
           </Avatar>
           <Typography component="h1" variant="h3">

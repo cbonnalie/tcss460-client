@@ -11,6 +11,8 @@ import { CircularProgress, Divider, List, Pagination, Stack } from '@mui/materia
 import { IBook } from 'types/book';
 import { BookListItem } from '../../components/BookListItem';
 import { useRouter } from 'next/navigation';
+import { ThemeMode } from '../../config';
+import { useTheme } from '@mui/material/styles';
 
 // loading UI
 const LoadingState = () => (
@@ -49,12 +51,14 @@ interface BooksListProps {
   onBookClick: (book: IBook) => void;
 }
 
-const BooksList: React.FC<BooksListProps> = ({ books, onBookClick }) => (
+const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, theme }) => (
   <List>
     {books.map((book, index) => (
       <React.Fragment key={`book-${book.isbn13}`}>
         <BookListItem book={book} onClick={() => onBookClick(book)} />
-        {index < books.length - 1 && <Divider variant="middle" component="li" />}
+        {index < books.length - 1 && <Divider variant="middle" component="li" sx={{
+          borderColor: theme.palette.mode === ThemeMode.DARK ? '#ffffff' : 'grey.A800'
+        }} />}
       </React.Fragment>
     ))}
   </List>
@@ -101,6 +105,7 @@ interface FilteredBookListProps {
 
 export default function FilteredBookList({ books, loading, error }: FilteredBookListProps) {
   const router = useRouter();
+  const theme = useTheme();
 
   const [page, setPage] = useState(1);
   const limit = 20;
@@ -137,13 +142,13 @@ export default function FilteredBookList({ books, loading, error }: FilteredBook
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="xl">
       <CssBaseline />
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Box sx={{ mt: 1, width: '100%' }}>
           {paginatedBooks.length > 0 ? (
             <>
-              <BooksList books={paginatedBooks} onBookClick={handleBookClick} />
+              <BooksList books={paginatedBooks} onBookClick={handleBookClick} theme={theme}/>
               <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
             </>
           ) : (

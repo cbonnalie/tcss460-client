@@ -68,7 +68,7 @@ export default function ChangePassword() {
             alignItems: 'center',
           }}
         >
-          <LockIcon sx={{ fontSize: 48, color: isDarkMode ? 'secondary.main' : 'primary.main' }} />
+          <LockIcon sx={{ fontSize: 48, color: 'primary.main' }} />
           <Typography variant="h3" mt={1}>
             Change Password
           </Typography>

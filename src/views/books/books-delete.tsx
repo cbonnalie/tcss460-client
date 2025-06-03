@@ -65,7 +65,7 @@ export default function BooksDelete() {
         >
           <Avatar sx={{
             m: 1,
-            bgcolor: isDarkMode ? 'secondary.main' : 'primary.main'
+            bgcolor: 'primary.main'
           }}>
             <TrashIcon />
           </Avatar>

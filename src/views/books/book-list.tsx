@@ -63,7 +63,7 @@ const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, isDarkTheme }
             variant="middle"
             component="li"
             sx={{
-              borderColor: isDarkTheme ? 'secondary.main' : 'grey.300',
+              borderColor: isDarkTheme ? '#ffffff' : 'grey.A800'
             }}
           />
         )}
@@ -85,7 +85,7 @@ interface PaginationControlProps {
   onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPageChange, isDarkTheme }) => (
+const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPageChange }) => (
   <Stack spacing={2} sx={{ my: 4, alignItems: 'center' }}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
       <Typography variant="body2" color="text.secondary">
@@ -97,7 +97,7 @@ const PaginationControl: React.FC<PaginationControlProps> = ({ pagination, onPag
       count={pagination.totalPages}
       page={pagination.page}
       onChange={onPageChange}
-      color={(isDarkTheme ? 'secondary' : 'primary') as 'primary' | 'secondary'}
+      color={'primary' as 'primary'}
       showFirstButton
       showLastButton
     />
@@ -207,7 +207,7 @@ export default function BookList() {
             <>
               <BooksList books={books} onBookClick={handleBookClick} isDarkTheme={isDarkTheme} />
 
-              <PaginationControl pagination={pagination} onPageChange={handlePageChange} isDarkTheme={isDarkTheme}/>
+              <PaginationControl pagination={pagination} onPageChange={handlePageChange} />
             </>
           ) : (
             <EmptyState />
