@@ -49,6 +49,7 @@ const EmptyState = () => (
 interface BooksListProps {
   books: IBook[];
   onBookClick: (book: IBook) => void;
+  theme: ReturnType<typeof useTheme>;
 }
 
 const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, theme }) => (
