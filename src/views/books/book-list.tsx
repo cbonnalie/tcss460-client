@@ -1,5 +1,5 @@
 ﻿'use client';
-
+//book-list.tsx
 import * as React from 'react';
 import { useCallback, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -63,7 +63,7 @@ const BooksList: React.FC<BooksListProps> = ({ books, onBookClick, isDarkTheme }
             variant="middle"
             component="li"
             sx={{
-              borderColor: isDarkTheme ? '#ffffff' : 'grey.A800'
+              borderColor: isDarkTheme ? 'grey.300' : 'grey.A800'
             }}
           />
         )}
@@ -193,7 +193,7 @@ export default function BookList() {
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
       <Box
         sx={{

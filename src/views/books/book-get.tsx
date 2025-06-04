@@ -1,5 +1,5 @@
 ﻿'use client';
-
+// book-get.tsx
 import * as React from 'react';
 
 import { Alert } from '@mui/material';
@@ -77,7 +77,7 @@ export default function BookGet() {
             <GetBook onSuccess={onSuccess} onError={onError} setBooks={setFilteredBooks} setIsLoading={setIsLoading} />
           </Box>
 
-          <Box sx={{ mt: 1 }}>
+          <Box sx={{ mt: 1, width: '100%' }}>
             <FilteredBookList books={filteredBooks} loading={isLoading} error={loadError} />
           </Box>
         </Box>
