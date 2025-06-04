@@ -63,7 +63,7 @@ export default function Profile() {
           p: 0.25,
           bgcolor: open ? iconBackColorOpen : 'transparent',
           borderRadius: 1,
-          '&:hover': { bgcolor: theme.palette.mode === ThemeMode.DARK ? 'secondary.light' : 'secondary.lighter' },
+          '&:hover': { bgcolor: theme.palette.mode === ThemeMode.DARK ? 'primary.dark' : 'primary.light' },
           '&:focus-visible': {
             outline: `2px solid ${theme.palette.secondary.dark}`,
             outlineOffset: 2

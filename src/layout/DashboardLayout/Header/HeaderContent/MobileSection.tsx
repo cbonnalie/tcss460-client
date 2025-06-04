@@ -60,7 +60,7 @@ export default function MobileSection() {
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          color="secondary"
+          color="primary"
           variant="light"
         >
           <MoreOutlined />

@@ -42,7 +42,7 @@ export default function FullScreen() {
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <Tooltip title={open ? 'Exit Fullscreen' : 'Fullscreen'}>
         <IconButton
-          color="secondary"
+          color="primary"
           variant="light"
           sx={{ color: 'text.primary', bgcolor: open ? iconBackColorOpen : 'transparent' }}
           aria-label="fullscreen toggler"

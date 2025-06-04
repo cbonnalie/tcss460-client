@@ -44,7 +44,7 @@ export default function Header() {
           aria-label="open drawer"
           onClick={() => handlerDrawerOpen(!drawerOpen)}
           edge="start"
-          color="secondary"
+          color="primary"
           variant="light"
           sx={{ color: 'text.primary', bgcolor: drawerOpen ? 'transparent' : iconBackColor, ml: { xs: 0, lg: -2 } }}
         >
