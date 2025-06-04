@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 //book-list.tsx
 import * as React from 'react';
 import { useCallback, useEffect } from 'react';
