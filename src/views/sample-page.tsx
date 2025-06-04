@@ -38,7 +38,7 @@ const teamMembers = [
 ];
 
 export default function SamplePage() {
-  const [hoveredMember, setHoveredMember] = useState(null);
+  const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
   const theme = useTheme();
   const accentColor = theme.palette.primary.main;
