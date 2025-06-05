@@ -38,4 +38,17 @@
 - Mark
     - Worked on and cleaned change password form, tested and added functionallity.
 - Noah
-    - Created and designed page UI for book delete. 
+    - Created and designed page UI for book delete.
+ 
+## Beta Sprint III
+
+### Contribution
+
+- Christian
+  
+- Kaleb
+
+- Mark
+
+- Noah
+    - Worked on deletion for books functionality. Tested on both the deletion of ISBN and range of years. Testing witnessed by Mark.
