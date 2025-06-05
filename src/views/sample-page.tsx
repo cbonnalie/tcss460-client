@@ -42,7 +42,6 @@ export default function SamplePage() {
 
   const theme = useTheme();
   const accentColor = theme.palette.primary.main;
-  const hoverAccentColor = theme.palette.primary.light;
 
   return (
     <>
@@ -83,7 +82,7 @@ export default function SamplePage() {
                       border: `2px solid ${accentColor}`,
                       transition: 'all 0.3s ease-in-out',
                       transform: hoveredMember === index ? 'scale(1.15)' : 'scale(1)',
-                      boxShadow: hoveredMember === index ? `0 0px 8px ${hoverAccentColor}` : 'none'
+                      boxShadow: hoveredMember === index ? `0 0px 8px ${accentColor}` : 'none'
                     }}
                   />
                 </a>
@@ -100,7 +99,7 @@ export default function SamplePage() {
                     variant="h4"
                     sx={{
                       transition: 'all 0.3s ease-in-out',
-                      textShadow: hoveredMember === index ? `0 0 2px ${accentColor}` : 'none'
+                      color: hoveredMember === index ? accentColor : 'inherit'
                     }}
                   >
                     {member.name}
