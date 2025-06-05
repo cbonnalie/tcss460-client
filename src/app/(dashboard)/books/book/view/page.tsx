@@ -72,6 +72,8 @@ export default function BookViewPage() {
     );
   }
 
+  const imgSrc = book.large === '' ? '/assets/images/books/no-cover-128.png' : book.large;
+
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />
@@ -97,7 +99,7 @@ export default function BookViewPage() {
         }}
       >
         <Box sx={{ mt: 2, mr: 8 }}>
-          <img src={ book.large } alt={book.title} style={{ width: '150px', height: 'auto', borderRadius: '8px' }} />
+          <img src={ imgSrc } alt={book.title} style={{ width: '150px', height: 'auto', borderRadius: '8px' }} />
         </Box>
 
         <Box
