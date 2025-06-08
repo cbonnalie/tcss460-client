@@ -68,7 +68,12 @@ export default function ChangePassword() {
           <Typography variant="h3" mt={1}>
             Change Password
           </Typography>
-          <Typography color="text.secondary">Update your account password</Typography>
+          <Typography color="text.secondary">
+            Update your account password
+          </Typography>
+          <Typography color={"red"} sx={{ textAlign: 'center'}}>
+            If you have just created an account, sign out and sign back in before changing your password
+          </Typography>
         </Box>
 
         <Box sx={{ mt: 1 }}>
