@@ -17,7 +17,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import { IBook } from 'types/book';
 import axios from 'utils/axios';
+
 createTheme();
+
 const transformBookData = (bookData: any) => ({
   isbn13: bookData.isbn13,
   authors: bookData.authors.split(', '),
@@ -34,6 +36,7 @@ const transformBookData = (bookData: any) => ({
   large: bookData.icons.large,
   small: bookData.icons.small
 });
+
 export default function BookViewPage() {
   const searchParams = useSearchParams();
   const isbn = searchParams.get('isbn13');
@@ -69,6 +72,8 @@ export default function BookViewPage() {
     );
   }
 
+  const imgSrc = book.large === '' ? '/assets/images/books/no-cover-128.png' : book.large;
+
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />
@@ -76,31 +81,50 @@ export default function BookViewPage() {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',
+          mt: 2
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           <ImportContactsIcon />
         </Avatar>
-        <Box sx={{ mt: 2 }}>
-          <img src={book.large} alt={book.title} style={{ maxWidth: '100%', height: 'auto' }} />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          mt: 4
+        }}
+      >
+        <Box sx={{ mt: 2, mr: 8 }}>
+          <img src={ imgSrc } alt={book.title} style={{ width: '150px', height: 'auto', borderRadius: '8px' }} />
         </Box>
-        <Typography component="h1" variant="h5">
-          {book.title}
-        </Typography>
-        <Typography sx={{ mt: 1 }}>
-          <strong>Author:</strong> {book.authors.join(', ')}
-        </Typography>
-        <Typography>
-          <strong>Original Title:</strong> {book.original_title}
-        </Typography>
-        <Typography>
-          <strong>ISBN</strong> {book.isbn13}
-        </Typography>
-        <Typography>
-          <strong>Publication Year:</strong> {book.publication}
-        </Typography>
-        <RatingSummary book={book} />
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          <Typography component="h1" variant="h2">
+            {book.title}
+          </Typography>
+          <Typography sx={{ mt: 4 }}>
+            <strong>Author:</strong> {book.authors.join(', ')}
+          </Typography>
+          <Typography>
+            <strong>Original Title:</strong> {book.original_title}
+          </Typography>
+          <Typography>
+            <strong>ISBN</strong> {book.isbn13}
+          </Typography>
+          <Typography>
+            <strong>Publication Year:</strong> {book.publication}
+          </Typography>
+          <RatingSummary book={book} />
+        </Box>
       </Box>
     </Container>
   );

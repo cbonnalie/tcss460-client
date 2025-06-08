@@ -1,5 +1,5 @@
 ﻿'use client';
-// book-get.tsx
+
 import * as React from 'react';
 
 import { Alert } from '@mui/material';
@@ -8,7 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import BookIcon from '@mui/icons-material/AutoStoriesOutlined';
-import GetBook from '../../sections/books/book-forms/bookGet';
+import BookSearch from '../../sections/books/book-forms/bookSearch';
 import Avatar from '@mui/material/Avatar';
 import FilteredBookList from './filtered-book-list';
 import { IBook } from 'types/book';
@@ -74,7 +74,7 @@ export default function BookGet() {
           </Typography>
 
           <Box sx={{ mt: 1 }}>
-            <GetBook onSuccess={onSuccess} onError={onError} setBooks={setFilteredBooks} setIsLoading={setIsLoading} />
+            <BookSearch onSuccess={onSuccess} onError={onError} setBooks={setFilteredBooks} setIsLoading={setIsLoading} />
           </Box>
 
           <Box sx={{ mt: 1, width: '100%' }}>

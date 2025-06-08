@@ -25,7 +25,7 @@ const transformBookData = (bookData: any) => ({
 });
 
 const fetchAllBooks = async (): Promise<IBook[]> => {
-  const limit = 1000;
+  const limit = 10000;
   let page = 1;
   let allBooks: IBook[] = [];
   let total = 0;
@@ -45,11 +45,11 @@ const fetchAllBooks = async (): Promise<IBook[]> => {
     return allBooks.map(transformBookData);
   } catch (error: any) {
     console.error('Failed to fetch all books:', error);
-    throw new Error(error?.response?.message || 'Unknown error while fetching book by all');
+    throw new Error(error.message || 'Unknown error while fetching book by all');
   }
 };
 
-const fetchBookByIsbn = async (isbn: string): Promise<IBook> => {
+const fetchBookByIsbn = async (isbn: string): Promise<IBook | null> => {
   try {
     const response = await axios.get('/books/isbn', {
       params: { isbn }
@@ -57,8 +57,12 @@ const fetchBookByIsbn = async (isbn: string): Promise<IBook> => {
 
     return transformBookData(response.data);
   } catch (error: any) {
+    if (error.message === 'No book found with ISBN ' + isbn) {
+      return null;
+    }
+
     console.error('Failed to fetch book by ISBN:', error);
-    throw new Error(error?.response?.data?.message || 'Unknown error while fetching book by ISBN');
+    throw new Error(error.message || 'Unknown error while fetching book by ISBN');
   }
 };
 
@@ -73,13 +77,17 @@ const fetchBooksByAuthor = async (authorQuery: string): Promise<IBook[]> => {
 
     return allBooks.map(transformBookData);
   } catch (error: any) {
+    if (error.message === 'No book found with authors ' + authorQuery) {
+      return [];
+    }
+
     console.error('Failed to fetch book by author:', error);
-    throw new Error(error?.response?.data?.message || 'Unknown error while fetching book by author');
+    throw new Error(error.message || 'Unknown error while fetching book by author');
   }
 };
 
 const fetchBooksbyMinRating = async (min_rating: number): Promise<IBook[]> => {
-  const limit = 50;
+  const limit = 10000;
   let page = 1;
   let allBooks: IBook[] = [];
 
@@ -102,13 +110,16 @@ const fetchBooksbyMinRating = async (min_rating: number): Promise<IBook[]> => {
 
     return allBooks.map(transformBookData);
   } catch (error: any) {
+    if (error.message === 'No books found with average rating >= ' + min_rating) {
+      return [];
+    }
     console.error('Failed to fetch book by min rating:', error);
-    throw new Error(error?.response?.data?.message || 'Unknown error while fetching book by min rating');
+    throw new Error(error.message || 'Unknown error while fetching book by min rating');
   }
 };
 
 const fetchBooksbyPopular = async (min_ratings: number): Promise<IBook[]> => {
-  const limit = 50;
+  const limit = 10000;
   let page = 1;
   let allBooks: IBook[] = [];
   try {
@@ -130,13 +141,16 @@ const fetchBooksbyPopular = async (min_ratings: number): Promise<IBook[]> => {
 
     return allBooks.map(transformBookData);
   } catch (error: any) {
+    if (error.message === 'No books found with at least ' + min_ratings + ' ratings') {
+      return [];
+    }
     console.error('Failed to fetch book by popular:', error);
-    throw new Error(error?.response?.data?.message || 'Unknown error while fetching book by popular');
+    throw new Error(error.message || 'Unknown error while fetching book by popular');
   }
 };
 
 const fetchAllBooksByYearRange = async (minYear: number = 1450, maxYear: number = new Date().getFullYear()): Promise<IBook[]> => {
-  const limit = 50;
+  const limit = 10000;
   let page = 1;
   let allBooks: IBook[] = [];
 
@@ -159,8 +173,11 @@ const fetchAllBooksByYearRange = async (minYear: number = 1450, maxYear: number 
 
     return allBooks.map(transformBookData);
   } catch (error: any) {
+    if (error.message === 'No books found between years ' + minYear + ' and ' + maxYear) {
+      return [];
+    }
     console.error('Failed to fetch book by year Range:', error);
-    throw new Error(error?.response?.data?.message || 'Unknown error while fetching book by year range');
+    throw new Error(error.message || 'Unknown error while fetching book by year range');
   }
 };
 
@@ -172,12 +189,15 @@ const fetchBooksbyTitle = async (title: string): Promise<IBook[]> => {
 
     return response.data.books.map(transformBookData);
   } catch (error: any) {
+    if (error.message === 'No book found with title matching ' + title) {
+      return [];
+    }
     console.error('Failed to fetch book by title:', error);
-    throw new Error(error?.response?.data?.message || 'Unknown error while fetching book by title');
+    throw new Error(error.message || 'Unknown error while fetching book by title');
   }
 };
 
-export default function GetBook({
+export default function BookSearch({
   onSuccess,
   onError,
   setBooks,
@@ -193,51 +213,93 @@ export default function GetBook({
     setIsLoading(true);
 
     try {
-      const allResults: IBook[][] = [];
+      const fetches: Promise<IBook[]>[] = [];
+      const searchSources: string[] = [];
 
-      const allBooks = await fetchAllBooks();
-      allResults.push(allBooks);
+      if (
+        !values.isbn13 &&
+        !values.authors &&
+        !values.min_ratings &&
+        !values.ratings_count &&
+        !values.publication_year_start &&
+        !values.publication_year_end &&
+        !values.title
+      ) {
+        const allBooks = await fetchAllBooks();
+        setBooks(allBooks);
+        onSuccess();
+        return;
+      }
 
       if (values.isbn13) {
-        const isbnBooks = await fetchBookByIsbn(values.isbn13);
-        const result: IBook[] = [];
-        result.push(isbnBooks);
-        allResults.push(result);
+        const book = await fetchBookByIsbn(values.isbn13);
+        if (!book) {
+          setBooks([]);
+          onSuccess();
+          return;
+        }
+        const potentialBook = book;
+
+        const filterPromises: Promise<IBook[]>[] = [];
+
+        if (values.authors) filterPromises.push(fetchBooksByAuthor(values.authors));
+
+        if (values.min_ratings) filterPromises.push(fetchBooksbyMinRating(values.min_ratings));
+
+        if (values.ratings_count) filterPromises.push(fetchBooksbyPopular(values.ratings_count));
+
+        if (values.publication_year_start || values.publication_year_end) {
+          const min = Number(values.publication_year_start) || 1450;
+          const max = Number(values.publication_year_end) || new Date().getFullYear();
+          filterPromises.push(fetchAllBooksByYearRange(min, max));
+        }
+
+        if (values.title) filterPromises.push(fetchBooksbyTitle(values.title));
+
+        const filters = await Promise.all(filterPromises);
+
+        const passesAllFilters = filters.every((books) => books.some((b) => b.isbn13 === potentialBook.isbn13));
+
+        setBooks(passesAllFilters ? [potentialBook] : []);
+        onSuccess();
+        return;
       }
 
       if (values.authors) {
-        const authorBooks = await fetchBooksByAuthor(values.authors);
-        allResults.push(authorBooks);
+        fetches.push(fetchBooksByAuthor(values.authors));
+        searchSources.push('authors');
       }
 
       if (values.min_ratings) {
-        const minRatingBooks = await fetchBooksbyMinRating(values.min_ratings);
-        allResults.push(minRatingBooks);
+        fetches.push(fetchBooksbyMinRating(values.min_ratings));
+        searchSources.push('min_ratings');
       }
 
       if (values.ratings_count) {
-        const popularBooks = await fetchBooksbyPopular(values.ratings_count);
-        allResults.push(popularBooks);
+        fetches.push(fetchBooksbyPopular(values.ratings_count));
+        searchSources.push('ratings_count');
       }
 
       if (values.publication_year_start || values.publication_year_end) {
-        const minYear = values.publication_year_start ? Number(values.publication_year_start) : 1450;
-        const maxYear = values.publication_year_end ? Number(values.publication_year_end) : new Date().getFullYear();
-
-        const yearBooks = await fetchAllBooksByYearRange(minYear, maxYear);
-        allResults.push(yearBooks);
+        const min = Number(values.publication_year_start) || 1450;
+        const max = Number(values.publication_year_end) || new Date().getFullYear();
+        fetches.push(fetchAllBooksByYearRange(min, max));
+        searchSources.push('year');
       }
 
       if (values.title) {
-        const titleBooks = await fetchBooksbyTitle(values.title);
-        allResults.push(titleBooks);
+        fetches.push(fetchBooksbyTitle(values.title));
+        searchSources.push('title');
       }
 
-      const intersectedBooks = allResults.reduce((acc, curr) => {
-        return acc.filter((book) => curr.some((b) => b.isbn13 === book.isbn13));
-      });
+      const results = await Promise.all(fetches);
 
-      setBooks(intersectedBooks);
+      const sorted = results.sort((a, b) => a.length - b.length);
+      const base = sorted[0];
+      const otherSets = sorted.slice(1).map((arr) => new Set(arr.map((book) => book.isbn13)));
+      const finalBooks = base.filter((book) => otherSets.every((set) => set.has(book.isbn13)));
+
+      setBooks(finalBooks);
       onSuccess();
     } catch (err: any) {
       onError('Failed to fetch books.');
