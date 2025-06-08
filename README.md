@@ -40,7 +40,7 @@
 - Noah
     - Created and designed page UI for book delete.
  
-## Final Production Sprint III
+## Final Production Sprint
 
 ### Contribution
 
