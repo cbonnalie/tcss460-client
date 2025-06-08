@@ -45,9 +45,10 @@
 ### Contribution
 
 - Christian
+    - Finished implementing dark mode. Created new landing page. 
   
 - Kaleb
-    - Search Performance, Single Book View Clean Up, No Book Image Placeholder
+    - Search Performance, Single Book View Clean Up, No Book Image Placeholder.
 
 - Mark
 
