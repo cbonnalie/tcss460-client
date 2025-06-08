@@ -189,7 +189,7 @@ const fetchBooksbyTitle = async (title: string): Promise<IBook[]> => {
 
     return response.data.books.map(transformBookData);
   } catch (error: any) {
-    if (error.message === 'No book found with title matching ' + title) {
+    if (error.message === 'No book found with title matching "' + title + '"') {
       return [];
     }
     console.error('Failed to fetch book by title:', error);
