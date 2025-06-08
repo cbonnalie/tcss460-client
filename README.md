@@ -40,15 +40,19 @@
 - Noah
     - Created and designed page UI for book delete.
  
-## Beta Sprint III
+## Final Production Sprint III
 
 ### Contribution
 
 - Christian
   
 - Kaleb
+    - Search Performance, Single Book View Clean Up, No Book Image Placeholder
 
 - Mark
 
 - Noah
     - Worked on deletion for books functionality. Tested on both the deletion of ISBN and range of years. Testing witnessed by Mark.
+
+### Notes
+Bug with the change password where if a user registers, and then tries to change their password, it will not work. This issue is fixed if they register, logout and then login, and then they can change their password. This is and issue with the api. API group have been notified but it has not been fixed.
