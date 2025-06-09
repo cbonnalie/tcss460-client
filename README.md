@@ -51,6 +51,7 @@
     - Search Performance, Single Book View Clean Up, No Book Image Placeholder.
 
 - Mark
+    - Notified the API group to fix change pass functionallity, reviewed change pass form for functionallity, Moral Support.
 
 - Noah
     - Worked on deletion for books functionality. Tested on both the deletion of ISBN and range of years. Testing witnessed by Mark.
